@@ -6,7 +6,7 @@ const avatarBackgroundColor = Color.fromRGBO(91, 91, 91, 91);
 const lightThemescaffoldColor = Color(0xFFEDEDED);
 const chatMessageTextColor = Color.fromARGB(255, 87, 83, 83);
 const disabledColor = Color(0xFFbcbcbc);
-const primaryColor = Color.fromRGBO(7, 55, 99, 1.0);
+const primaryColor = Color.fromRGBO(5, 46, 83, 1);
 const secondaryColor = Color(0xFF2d3032);
 const darkSucessColor = Color.fromARGB(255, 22, 101, 52);
 const darkErrorColor = Color(0xFFC11414);
@@ -79,6 +79,6 @@ abstract class AppThemes {
               ),
         ),
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    scaffoldBackgroundColor: primaryColor,
+    scaffoldBackgroundColor: lightThemescaffoldColor,
   );
 }

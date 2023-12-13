@@ -28,11 +28,11 @@ class DashboardView extends StatelessWidget {
             );
     double iconSize = 37.h;
     return Scaffold(
-      backgroundColor: lightThemescaffoldColor,
       drawer: const Drawer(
-          child: Column(
-        children: [Text("drawer")],
-      )),
+        child: Column(
+          children: [Text("drawer")],
+        ),
+      ),
       appBar: AppBar(
         elevation: 10.h,
         title: Image.asset(
