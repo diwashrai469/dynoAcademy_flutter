@@ -19,6 +19,9 @@ import 'package:dynoacademy/features/courses/domain/usecases/get_courses.dart';
 import 'package:equatable/equatable.dart';
 
 
+import 'package:flutter/material.dart';
+
+
 import 'package:injectable/injectable.dart';
 
 
@@ -41,6 +44,10 @@ class CoursesCubitCubit extends Cubit<CoursesCubitState> {
   CoursesCubitCubit(this._getCourses, this._appRouters, this._toastService)
 
       : super(DataLoading());
+
+  initilise() {
+    getCourse();
+  }
 
 
   getCourse() async {
@@ -65,10 +72,6 @@ class CoursesCubitCubit extends Cubit<CoursesCubitState> {
       (CourseResponseModel data) async {
 
         emit(DataLoaded(data));
-
-
-        print(
-            " getcourse cubit :${data.pageProps?.courseData?.data?.first.cost}");
 
       },
 

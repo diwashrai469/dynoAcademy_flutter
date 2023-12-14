@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dynoacademy/core/injection/injection.dart';
 import 'package:dynoacademy/features/courses/presentation/cubit/courses_cubit_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,12 +10,21 @@ class CourseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("build called");
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Courses"),
       ),
-      body: BlocBuilder<CoursesCubitCubit, CoursesCubitState>(
-        builder: (context, state) {
+      body: builderBody(context),
+    );
+  }
+
+  BlocProvider<CoursesCubitCubit> builderBody(BuildContext context) {
+    return BlocProvider(
+      create: (context) => locator<CoursesCubitCubit>()..initilise(),
+      child: BlocBuilder<CoursesCubitCubit, CoursesCubitState>(
+        builder: (_, state) {
           if (state is DataLoading) {
             return const CircularProgressIndicator();
           }
