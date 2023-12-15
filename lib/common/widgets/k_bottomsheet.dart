@@ -1,13 +1,18 @@
-// import 'package:dynoacademy/theme/app_theme.dart';
-// import 'package:flutter/material.dart';
+import 'package:dynoacademy/theme/app_theme.dart';
+import 'package:flutter/material.dart';
 
-// kButtonsheet(
-//   Widget widget,
-// ) {
-//   Get.bottomSheet(
-//       shape: const RoundedRectangleBorder(
-//           borderRadius: BorderRadius.only(
-//               topLeft: Radius.circular(12), topRight: Radius.circular(12))),
-//       backgroundColor: lightThemescaffoldColor,
-//       widget);
-// }
+kBottonsheet(
+  BuildContext context,
+  Widget widget,
+  bool isScrollControlled,
+) {
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: isScrollControlled,
+    builder: (context) => widget,
+    shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12), topRight: Radius.circular(12))),
+    backgroundColor: lightThemescaffoldColor,
+  );
+}

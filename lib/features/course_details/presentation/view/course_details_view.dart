@@ -28,6 +28,7 @@ class CourseDetails extends StatelessWidget {
       create: (_) {
         var bloc = locator<CourseDetailsBloc>();
         bloc.add(GetSingleCourseDetails(slug: slug));
+
         return bloc;
       },
       child: BlocBuilder<CourseDetailsBloc, CourseDetailsState>(

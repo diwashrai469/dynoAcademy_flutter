@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:dynoacademy/core/app_routers/app_routers.dart';
 import 'package:dynoacademy/core/services/network_services.dart';
 import 'package:dynoacademy/core/services/toast_services.dart';
 import 'package:dynoacademy/features/courses/data/model/course_response_model/course_response_model.dart';
@@ -12,11 +11,9 @@ part 'courses_cubit_state.dart';
 class CoursesCubitCubit extends Cubit<CoursesCubitState> {
   final GetCourses _getCourses;
 
-  final AppRouters _appRouters;
-
   final ToastService _toastService;
 
-  CoursesCubitCubit(this._getCourses, this._appRouters, this._toastService)
+  CoursesCubitCubit(this._getCourses, this._toastService)
       : super(DataLoading());
 
   initilise() {

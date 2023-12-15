@@ -8,7 +8,6 @@ class DioService {
   Dio getDioInstance() {
     Dio dio = Dio(
       BaseOptions(
-        // baseUrl: "http://192.168.101.15:4000/api/v1/",
         baseUrl: "https://dynoacademy.com",
       ),
     );

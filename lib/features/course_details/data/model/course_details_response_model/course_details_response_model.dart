@@ -28,13 +28,13 @@ class PageProps with _$PageProps {
 @freezed
 class CourseData with _$CourseData {
   const factory CourseData({
-    String? sId,
-    MentorId? mentorId,
-    String? courseName,
-    int? courseDuration,
-    String? courseInfo,
-    String? courseDescription,
-    int? studentsEnrolled,
+    String? id,
+    MentorId? mentor_id,
+    String? course_name,
+    int? course_duration,
+    String? course_info,
+    String? course_description,
+    int? students_enrolled,
     double? rating,
     int? raters,
     int? cost,
@@ -43,16 +43,16 @@ class CourseData with _$CourseData {
     String? language,
     bool? active,
     bool? approved,
-    String? courseCreated,
+    String? course_created,
     String? createdAt,
     String? updatedAt,
     int? iV,
     String? thumbnail,
-    String? courseSlug,
+    String? course_slug,
     int? views,
-    String? certificateLearning,
-    int? highCost,
-    String? discountPriceEnds,
+    String? certificate_learning,
+    int? high_cost,
+    String? discount_price_ends,
   }) = _CourseData;
 
   factory CourseData.fromJson(Map<String, dynamic> json) =>
@@ -62,7 +62,7 @@ class CourseData with _$CourseData {
 @freezed
 class MentorId with _$MentorId {
   const factory MentorId({
-    String? sId,
+    String? id,
     String? name,
   }) = _MentorId;
 

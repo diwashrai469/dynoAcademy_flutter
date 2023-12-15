@@ -68,7 +68,6 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i16.CoursesCubitCubit>(() => _i16.CoursesCubitCubit(
           gh<_i13.GetCourses>(),
-          gh<_i3.AppRouters>(),
           gh<_i6.ToastService>(),
         ));
     return this;

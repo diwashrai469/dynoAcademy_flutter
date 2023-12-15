@@ -373,13 +373,13 @@ CourseData _$CourseDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CourseData {
-  String? get sId => throw _privateConstructorUsedError;
-  MentorId? get mentorId => throw _privateConstructorUsedError;
-  String? get courseName => throw _privateConstructorUsedError;
-  int? get courseDuration => throw _privateConstructorUsedError;
-  String? get courseInfo => throw _privateConstructorUsedError;
-  String? get courseDescription => throw _privateConstructorUsedError;
-  int? get studentsEnrolled => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
+  MentorId? get mentor_id => throw _privateConstructorUsedError;
+  String? get course_name => throw _privateConstructorUsedError;
+  int? get course_duration => throw _privateConstructorUsedError;
+  String? get course_info => throw _privateConstructorUsedError;
+  String? get course_description => throw _privateConstructorUsedError;
+  int? get students_enrolled => throw _privateConstructorUsedError;
   double? get rating => throw _privateConstructorUsedError;
   int? get raters => throw _privateConstructorUsedError;
   int? get cost => throw _privateConstructorUsedError;
@@ -388,16 +388,16 @@ mixin _$CourseData {
   String? get language => throw _privateConstructorUsedError;
   bool? get active => throw _privateConstructorUsedError;
   bool? get approved => throw _privateConstructorUsedError;
-  String? get courseCreated => throw _privateConstructorUsedError;
+  String? get course_created => throw _privateConstructorUsedError;
   String? get createdAt => throw _privateConstructorUsedError;
   String? get updatedAt => throw _privateConstructorUsedError;
   int? get iV => throw _privateConstructorUsedError;
   String? get thumbnail => throw _privateConstructorUsedError;
-  String? get courseSlug => throw _privateConstructorUsedError;
+  String? get course_slug => throw _privateConstructorUsedError;
   int? get views => throw _privateConstructorUsedError;
-  String? get certificateLearning => throw _privateConstructorUsedError;
-  int? get highCost => throw _privateConstructorUsedError;
-  String? get discountPriceEnds => throw _privateConstructorUsedError;
+  String? get certificate_learning => throw _privateConstructorUsedError;
+  int? get high_cost => throw _privateConstructorUsedError;
+  String? get discount_price_ends => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -412,13 +412,13 @@ abstract class $CourseDataCopyWith<$Res> {
       _$CourseDataCopyWithImpl<$Res, CourseData>;
   @useResult
   $Res call(
-      {String? sId,
-      MentorId? mentorId,
-      String? courseName,
-      int? courseDuration,
-      String? courseInfo,
-      String? courseDescription,
-      int? studentsEnrolled,
+      {String? id,
+      MentorId? mentor_id,
+      String? course_name,
+      int? course_duration,
+      String? course_info,
+      String? course_description,
+      int? students_enrolled,
       double? rating,
       int? raters,
       int? cost,
@@ -427,18 +427,18 @@ abstract class $CourseDataCopyWith<$Res> {
       String? language,
       bool? active,
       bool? approved,
-      String? courseCreated,
+      String? course_created,
       String? createdAt,
       String? updatedAt,
       int? iV,
       String? thumbnail,
-      String? courseSlug,
+      String? course_slug,
       int? views,
-      String? certificateLearning,
-      int? highCost,
-      String? discountPriceEnds});
+      String? certificate_learning,
+      int? high_cost,
+      String? discount_price_ends});
 
-  $MentorIdCopyWith<$Res>? get mentorId;
+  $MentorIdCopyWith<$Res>? get mentor_id;
 }
 
 /// @nodoc
@@ -454,13 +454,13 @@ class _$CourseDataCopyWithImpl<$Res, $Val extends CourseData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sId = freezed,
-    Object? mentorId = freezed,
-    Object? courseName = freezed,
-    Object? courseDuration = freezed,
-    Object? courseInfo = freezed,
-    Object? courseDescription = freezed,
-    Object? studentsEnrolled = freezed,
+    Object? id = freezed,
+    Object? mentor_id = freezed,
+    Object? course_name = freezed,
+    Object? course_duration = freezed,
+    Object? course_info = freezed,
+    Object? course_description = freezed,
+    Object? students_enrolled = freezed,
     Object? rating = freezed,
     Object? raters = freezed,
     Object? cost = freezed,
@@ -469,45 +469,45 @@ class _$CourseDataCopyWithImpl<$Res, $Val extends CourseData>
     Object? language = freezed,
     Object? active = freezed,
     Object? approved = freezed,
-    Object? courseCreated = freezed,
+    Object? course_created = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? iV = freezed,
     Object? thumbnail = freezed,
-    Object? courseSlug = freezed,
+    Object? course_slug = freezed,
     Object? views = freezed,
-    Object? certificateLearning = freezed,
-    Object? highCost = freezed,
-    Object? discountPriceEnds = freezed,
+    Object? certificate_learning = freezed,
+    Object? high_cost = freezed,
+    Object? discount_price_ends = freezed,
   }) {
     return _then(_value.copyWith(
-      sId: freezed == sId
-          ? _value.sId
-          : sId // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      mentorId: freezed == mentorId
-          ? _value.mentorId
-          : mentorId // ignore: cast_nullable_to_non_nullable
+      mentor_id: freezed == mentor_id
+          ? _value.mentor_id
+          : mentor_id // ignore: cast_nullable_to_non_nullable
               as MentorId?,
-      courseName: freezed == courseName
-          ? _value.courseName
-          : courseName // ignore: cast_nullable_to_non_nullable
+      course_name: freezed == course_name
+          ? _value.course_name
+          : course_name // ignore: cast_nullable_to_non_nullable
               as String?,
-      courseDuration: freezed == courseDuration
-          ? _value.courseDuration
-          : courseDuration // ignore: cast_nullable_to_non_nullable
+      course_duration: freezed == course_duration
+          ? _value.course_duration
+          : course_duration // ignore: cast_nullable_to_non_nullable
               as int?,
-      courseInfo: freezed == courseInfo
-          ? _value.courseInfo
-          : courseInfo // ignore: cast_nullable_to_non_nullable
+      course_info: freezed == course_info
+          ? _value.course_info
+          : course_info // ignore: cast_nullable_to_non_nullable
               as String?,
-      courseDescription: freezed == courseDescription
-          ? _value.courseDescription
-          : courseDescription // ignore: cast_nullable_to_non_nullable
+      course_description: freezed == course_description
+          ? _value.course_description
+          : course_description // ignore: cast_nullable_to_non_nullable
               as String?,
-      studentsEnrolled: freezed == studentsEnrolled
-          ? _value.studentsEnrolled
-          : studentsEnrolled // ignore: cast_nullable_to_non_nullable
+      students_enrolled: freezed == students_enrolled
+          ? _value.students_enrolled
+          : students_enrolled // ignore: cast_nullable_to_non_nullable
               as int?,
       rating: freezed == rating
           ? _value.rating
@@ -541,9 +541,9 @@ class _$CourseDataCopyWithImpl<$Res, $Val extends CourseData>
           ? _value.approved
           : approved // ignore: cast_nullable_to_non_nullable
               as bool?,
-      courseCreated: freezed == courseCreated
-          ? _value.courseCreated
-          : courseCreated // ignore: cast_nullable_to_non_nullable
+      course_created: freezed == course_created
+          ? _value.course_created
+          : course_created // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -561,38 +561,38 @@ class _$CourseDataCopyWithImpl<$Res, $Val extends CourseData>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
-      courseSlug: freezed == courseSlug
-          ? _value.courseSlug
-          : courseSlug // ignore: cast_nullable_to_non_nullable
+      course_slug: freezed == course_slug
+          ? _value.course_slug
+          : course_slug // ignore: cast_nullable_to_non_nullable
               as String?,
       views: freezed == views
           ? _value.views
           : views // ignore: cast_nullable_to_non_nullable
               as int?,
-      certificateLearning: freezed == certificateLearning
-          ? _value.certificateLearning
-          : certificateLearning // ignore: cast_nullable_to_non_nullable
+      certificate_learning: freezed == certificate_learning
+          ? _value.certificate_learning
+          : certificate_learning // ignore: cast_nullable_to_non_nullable
               as String?,
-      highCost: freezed == highCost
-          ? _value.highCost
-          : highCost // ignore: cast_nullable_to_non_nullable
+      high_cost: freezed == high_cost
+          ? _value.high_cost
+          : high_cost // ignore: cast_nullable_to_non_nullable
               as int?,
-      discountPriceEnds: freezed == discountPriceEnds
-          ? _value.discountPriceEnds
-          : discountPriceEnds // ignore: cast_nullable_to_non_nullable
+      discount_price_ends: freezed == discount_price_ends
+          ? _value.discount_price_ends
+          : discount_price_ends // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $MentorIdCopyWith<$Res>? get mentorId {
-    if (_value.mentorId == null) {
+  $MentorIdCopyWith<$Res>? get mentor_id {
+    if (_value.mentor_id == null) {
       return null;
     }
 
-    return $MentorIdCopyWith<$Res>(_value.mentorId!, (value) {
-      return _then(_value.copyWith(mentorId: value) as $Val);
+    return $MentorIdCopyWith<$Res>(_value.mentor_id!, (value) {
+      return _then(_value.copyWith(mentor_id: value) as $Val);
     });
   }
 }
@@ -606,13 +606,13 @@ abstract class _$$CourseDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? sId,
-      MentorId? mentorId,
-      String? courseName,
-      int? courseDuration,
-      String? courseInfo,
-      String? courseDescription,
-      int? studentsEnrolled,
+      {String? id,
+      MentorId? mentor_id,
+      String? course_name,
+      int? course_duration,
+      String? course_info,
+      String? course_description,
+      int? students_enrolled,
       double? rating,
       int? raters,
       int? cost,
@@ -621,19 +621,19 @@ abstract class _$$CourseDataImplCopyWith<$Res>
       String? language,
       bool? active,
       bool? approved,
-      String? courseCreated,
+      String? course_created,
       String? createdAt,
       String? updatedAt,
       int? iV,
       String? thumbnail,
-      String? courseSlug,
+      String? course_slug,
       int? views,
-      String? certificateLearning,
-      int? highCost,
-      String? discountPriceEnds});
+      String? certificate_learning,
+      int? high_cost,
+      String? discount_price_ends});
 
   @override
-  $MentorIdCopyWith<$Res>? get mentorId;
+  $MentorIdCopyWith<$Res>? get mentor_id;
 }
 
 /// @nodoc
@@ -647,13 +647,13 @@ class __$$CourseDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sId = freezed,
-    Object? mentorId = freezed,
-    Object? courseName = freezed,
-    Object? courseDuration = freezed,
-    Object? courseInfo = freezed,
-    Object? courseDescription = freezed,
-    Object? studentsEnrolled = freezed,
+    Object? id = freezed,
+    Object? mentor_id = freezed,
+    Object? course_name = freezed,
+    Object? course_duration = freezed,
+    Object? course_info = freezed,
+    Object? course_description = freezed,
+    Object? students_enrolled = freezed,
     Object? rating = freezed,
     Object? raters = freezed,
     Object? cost = freezed,
@@ -662,45 +662,45 @@ class __$$CourseDataImplCopyWithImpl<$Res>
     Object? language = freezed,
     Object? active = freezed,
     Object? approved = freezed,
-    Object? courseCreated = freezed,
+    Object? course_created = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? iV = freezed,
     Object? thumbnail = freezed,
-    Object? courseSlug = freezed,
+    Object? course_slug = freezed,
     Object? views = freezed,
-    Object? certificateLearning = freezed,
-    Object? highCost = freezed,
-    Object? discountPriceEnds = freezed,
+    Object? certificate_learning = freezed,
+    Object? high_cost = freezed,
+    Object? discount_price_ends = freezed,
   }) {
     return _then(_$CourseDataImpl(
-      sId: freezed == sId
-          ? _value.sId
-          : sId // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      mentorId: freezed == mentorId
-          ? _value.mentorId
-          : mentorId // ignore: cast_nullable_to_non_nullable
+      mentor_id: freezed == mentor_id
+          ? _value.mentor_id
+          : mentor_id // ignore: cast_nullable_to_non_nullable
               as MentorId?,
-      courseName: freezed == courseName
-          ? _value.courseName
-          : courseName // ignore: cast_nullable_to_non_nullable
+      course_name: freezed == course_name
+          ? _value.course_name
+          : course_name // ignore: cast_nullable_to_non_nullable
               as String?,
-      courseDuration: freezed == courseDuration
-          ? _value.courseDuration
-          : courseDuration // ignore: cast_nullable_to_non_nullable
+      course_duration: freezed == course_duration
+          ? _value.course_duration
+          : course_duration // ignore: cast_nullable_to_non_nullable
               as int?,
-      courseInfo: freezed == courseInfo
-          ? _value.courseInfo
-          : courseInfo // ignore: cast_nullable_to_non_nullable
+      course_info: freezed == course_info
+          ? _value.course_info
+          : course_info // ignore: cast_nullable_to_non_nullable
               as String?,
-      courseDescription: freezed == courseDescription
-          ? _value.courseDescription
-          : courseDescription // ignore: cast_nullable_to_non_nullable
+      course_description: freezed == course_description
+          ? _value.course_description
+          : course_description // ignore: cast_nullable_to_non_nullable
               as String?,
-      studentsEnrolled: freezed == studentsEnrolled
-          ? _value.studentsEnrolled
-          : studentsEnrolled // ignore: cast_nullable_to_non_nullable
+      students_enrolled: freezed == students_enrolled
+          ? _value.students_enrolled
+          : students_enrolled // ignore: cast_nullable_to_non_nullable
               as int?,
       rating: freezed == rating
           ? _value.rating
@@ -734,9 +734,9 @@ class __$$CourseDataImplCopyWithImpl<$Res>
           ? _value.approved
           : approved // ignore: cast_nullable_to_non_nullable
               as bool?,
-      courseCreated: freezed == courseCreated
-          ? _value.courseCreated
-          : courseCreated // ignore: cast_nullable_to_non_nullable
+      course_created: freezed == course_created
+          ? _value.course_created
+          : course_created // ignore: cast_nullable_to_non_nullable
               as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -754,25 +754,25 @@ class __$$CourseDataImplCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String?,
-      courseSlug: freezed == courseSlug
-          ? _value.courseSlug
-          : courseSlug // ignore: cast_nullable_to_non_nullable
+      course_slug: freezed == course_slug
+          ? _value.course_slug
+          : course_slug // ignore: cast_nullable_to_non_nullable
               as String?,
       views: freezed == views
           ? _value.views
           : views // ignore: cast_nullable_to_non_nullable
               as int?,
-      certificateLearning: freezed == certificateLearning
-          ? _value.certificateLearning
-          : certificateLearning // ignore: cast_nullable_to_non_nullable
+      certificate_learning: freezed == certificate_learning
+          ? _value.certificate_learning
+          : certificate_learning // ignore: cast_nullable_to_non_nullable
               as String?,
-      highCost: freezed == highCost
-          ? _value.highCost
-          : highCost // ignore: cast_nullable_to_non_nullable
+      high_cost: freezed == high_cost
+          ? _value.high_cost
+          : high_cost // ignore: cast_nullable_to_non_nullable
               as int?,
-      discountPriceEnds: freezed == discountPriceEnds
-          ? _value.discountPriceEnds
-          : discountPriceEnds // ignore: cast_nullable_to_non_nullable
+      discount_price_ends: freezed == discount_price_ends
+          ? _value.discount_price_ends
+          : discount_price_ends // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -782,13 +782,13 @@ class __$$CourseDataImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CourseDataImpl implements _CourseData {
   const _$CourseDataImpl(
-      {this.sId,
-      this.mentorId,
-      this.courseName,
-      this.courseDuration,
-      this.courseInfo,
-      this.courseDescription,
-      this.studentsEnrolled,
+      {this.id,
+      this.mentor_id,
+      this.course_name,
+      this.course_duration,
+      this.course_info,
+      this.course_description,
+      this.students_enrolled,
       this.rating,
       this.raters,
       this.cost,
@@ -797,34 +797,34 @@ class _$CourseDataImpl implements _CourseData {
       this.language,
       this.active,
       this.approved,
-      this.courseCreated,
+      this.course_created,
       this.createdAt,
       this.updatedAt,
       this.iV,
       this.thumbnail,
-      this.courseSlug,
+      this.course_slug,
       this.views,
-      this.certificateLearning,
-      this.highCost,
-      this.discountPriceEnds});
+      this.certificate_learning,
+      this.high_cost,
+      this.discount_price_ends});
 
   factory _$CourseDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$CourseDataImplFromJson(json);
 
   @override
-  final String? sId;
+  final String? id;
   @override
-  final MentorId? mentorId;
+  final MentorId? mentor_id;
   @override
-  final String? courseName;
+  final String? course_name;
   @override
-  final int? courseDuration;
+  final int? course_duration;
   @override
-  final String? courseInfo;
+  final String? course_info;
   @override
-  final String? courseDescription;
+  final String? course_description;
   @override
-  final int? studentsEnrolled;
+  final int? students_enrolled;
   @override
   final double? rating;
   @override
@@ -842,7 +842,7 @@ class _$CourseDataImpl implements _CourseData {
   @override
   final bool? approved;
   @override
-  final String? courseCreated;
+  final String? course_created;
   @override
   final String? createdAt;
   @override
@@ -852,19 +852,19 @@ class _$CourseDataImpl implements _CourseData {
   @override
   final String? thumbnail;
   @override
-  final String? courseSlug;
+  final String? course_slug;
   @override
   final int? views;
   @override
-  final String? certificateLearning;
+  final String? certificate_learning;
   @override
-  final int? highCost;
+  final int? high_cost;
   @override
-  final String? discountPriceEnds;
+  final String? discount_price_ends;
 
   @override
   String toString() {
-    return 'CourseData(sId: $sId, mentorId: $mentorId, courseName: $courseName, courseDuration: $courseDuration, courseInfo: $courseInfo, courseDescription: $courseDescription, studentsEnrolled: $studentsEnrolled, rating: $rating, raters: $raters, cost: $cost, lessons: $lessons, skillLevel: $skillLevel, language: $language, active: $active, approved: $approved, courseCreated: $courseCreated, createdAt: $createdAt, updatedAt: $updatedAt, iV: $iV, thumbnail: $thumbnail, courseSlug: $courseSlug, views: $views, certificateLearning: $certificateLearning, highCost: $highCost, discountPriceEnds: $discountPriceEnds)';
+    return 'CourseData(id: $id, mentor_id: $mentor_id, course_name: $course_name, course_duration: $course_duration, course_info: $course_info, course_description: $course_description, students_enrolled: $students_enrolled, rating: $rating, raters: $raters, cost: $cost, lessons: $lessons, skillLevel: $skillLevel, language: $language, active: $active, approved: $approved, course_created: $course_created, createdAt: $createdAt, updatedAt: $updatedAt, iV: $iV, thumbnail: $thumbnail, course_slug: $course_slug, views: $views, certificate_learning: $certificate_learning, high_cost: $high_cost, discount_price_ends: $discount_price_ends)';
   }
 
   @override
@@ -872,19 +872,19 @@ class _$CourseDataImpl implements _CourseData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CourseDataImpl &&
-            (identical(other.sId, sId) || other.sId == sId) &&
-            (identical(other.mentorId, mentorId) ||
-                other.mentorId == mentorId) &&
-            (identical(other.courseName, courseName) ||
-                other.courseName == courseName) &&
-            (identical(other.courseDuration, courseDuration) ||
-                other.courseDuration == courseDuration) &&
-            (identical(other.courseInfo, courseInfo) ||
-                other.courseInfo == courseInfo) &&
-            (identical(other.courseDescription, courseDescription) ||
-                other.courseDescription == courseDescription) &&
-            (identical(other.studentsEnrolled, studentsEnrolled) ||
-                other.studentsEnrolled == studentsEnrolled) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.mentor_id, mentor_id) ||
+                other.mentor_id == mentor_id) &&
+            (identical(other.course_name, course_name) ||
+                other.course_name == course_name) &&
+            (identical(other.course_duration, course_duration) ||
+                other.course_duration == course_duration) &&
+            (identical(other.course_info, course_info) ||
+                other.course_info == course_info) &&
+            (identical(other.course_description, course_description) ||
+                other.course_description == course_description) &&
+            (identical(other.students_enrolled, students_enrolled) ||
+                other.students_enrolled == students_enrolled) &&
             (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.raters, raters) || other.raters == raters) &&
             (identical(other.cost, cost) || other.cost == cost) &&
@@ -896,8 +896,8 @@ class _$CourseDataImpl implements _CourseData {
             (identical(other.active, active) || other.active == active) &&
             (identical(other.approved, approved) ||
                 other.approved == approved) &&
-            (identical(other.courseCreated, courseCreated) ||
-                other.courseCreated == courseCreated) &&
+            (identical(other.course_created, course_created) ||
+                other.course_created == course_created) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -905,28 +905,28 @@ class _$CourseDataImpl implements _CourseData {
             (identical(other.iV, iV) || other.iV == iV) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
-            (identical(other.courseSlug, courseSlug) ||
-                other.courseSlug == courseSlug) &&
+            (identical(other.course_slug, course_slug) ||
+                other.course_slug == course_slug) &&
             (identical(other.views, views) || other.views == views) &&
-            (identical(other.certificateLearning, certificateLearning) ||
-                other.certificateLearning == certificateLearning) &&
-            (identical(other.highCost, highCost) ||
-                other.highCost == highCost) &&
-            (identical(other.discountPriceEnds, discountPriceEnds) ||
-                other.discountPriceEnds == discountPriceEnds));
+            (identical(other.certificate_learning, certificate_learning) ||
+                other.certificate_learning == certificate_learning) &&
+            (identical(other.high_cost, high_cost) ||
+                other.high_cost == high_cost) &&
+            (identical(other.discount_price_ends, discount_price_ends) ||
+                other.discount_price_ends == discount_price_ends));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        sId,
-        mentorId,
-        courseName,
-        courseDuration,
-        courseInfo,
-        courseDescription,
-        studentsEnrolled,
+        id,
+        mentor_id,
+        course_name,
+        course_duration,
+        course_info,
+        course_description,
+        students_enrolled,
         rating,
         raters,
         cost,
@@ -935,16 +935,16 @@ class _$CourseDataImpl implements _CourseData {
         language,
         active,
         approved,
-        courseCreated,
+        course_created,
         createdAt,
         updatedAt,
         iV,
         thumbnail,
-        courseSlug,
+        course_slug,
         views,
-        certificateLearning,
-        highCost,
-        discountPriceEnds
+        certificate_learning,
+        high_cost,
+        discount_price_ends
       ]);
 
   @JsonKey(ignore: true)
@@ -963,13 +963,13 @@ class _$CourseDataImpl implements _CourseData {
 
 abstract class _CourseData implements CourseData {
   const factory _CourseData(
-      {final String? sId,
-      final MentorId? mentorId,
-      final String? courseName,
-      final int? courseDuration,
-      final String? courseInfo,
-      final String? courseDescription,
-      final int? studentsEnrolled,
+      {final String? id,
+      final MentorId? mentor_id,
+      final String? course_name,
+      final int? course_duration,
+      final String? course_info,
+      final String? course_description,
+      final int? students_enrolled,
       final double? rating,
       final int? raters,
       final int? cost,
@@ -978,34 +978,34 @@ abstract class _CourseData implements CourseData {
       final String? language,
       final bool? active,
       final bool? approved,
-      final String? courseCreated,
+      final String? course_created,
       final String? createdAt,
       final String? updatedAt,
       final int? iV,
       final String? thumbnail,
-      final String? courseSlug,
+      final String? course_slug,
       final int? views,
-      final String? certificateLearning,
-      final int? highCost,
-      final String? discountPriceEnds}) = _$CourseDataImpl;
+      final String? certificate_learning,
+      final int? high_cost,
+      final String? discount_price_ends}) = _$CourseDataImpl;
 
   factory _CourseData.fromJson(Map<String, dynamic> json) =
       _$CourseDataImpl.fromJson;
 
   @override
-  String? get sId;
+  String? get id;
   @override
-  MentorId? get mentorId;
+  MentorId? get mentor_id;
   @override
-  String? get courseName;
+  String? get course_name;
   @override
-  int? get courseDuration;
+  int? get course_duration;
   @override
-  String? get courseInfo;
+  String? get course_info;
   @override
-  String? get courseDescription;
+  String? get course_description;
   @override
-  int? get studentsEnrolled;
+  int? get students_enrolled;
   @override
   double? get rating;
   @override
@@ -1023,7 +1023,7 @@ abstract class _CourseData implements CourseData {
   @override
   bool? get approved;
   @override
-  String? get courseCreated;
+  String? get course_created;
   @override
   String? get createdAt;
   @override
@@ -1033,15 +1033,15 @@ abstract class _CourseData implements CourseData {
   @override
   String? get thumbnail;
   @override
-  String? get courseSlug;
+  String? get course_slug;
   @override
   int? get views;
   @override
-  String? get certificateLearning;
+  String? get certificate_learning;
   @override
-  int? get highCost;
+  int? get high_cost;
   @override
-  String? get discountPriceEnds;
+  String? get discount_price_ends;
   @override
   @JsonKey(ignore: true)
   _$$CourseDataImplCopyWith<_$CourseDataImpl> get copyWith =>
@@ -1054,7 +1054,7 @@ MentorId _$MentorIdFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MentorId {
-  String? get sId => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1068,7 +1068,7 @@ abstract class $MentorIdCopyWith<$Res> {
   factory $MentorIdCopyWith(MentorId value, $Res Function(MentorId) then) =
       _$MentorIdCopyWithImpl<$Res, MentorId>;
   @useResult
-  $Res call({String? sId, String? name});
+  $Res call({String? id, String? name});
 }
 
 /// @nodoc
@@ -1084,13 +1084,13 @@ class _$MentorIdCopyWithImpl<$Res, $Val extends MentorId>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sId = freezed,
+    Object? id = freezed,
     Object? name = freezed,
   }) {
     return _then(_value.copyWith(
-      sId: freezed == sId
-          ? _value.sId
-          : sId // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String?,
       name: freezed == name
           ? _value.name
@@ -1108,7 +1108,7 @@ abstract class _$$MentorIdImplCopyWith<$Res>
       __$$MentorIdImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? sId, String? name});
+  $Res call({String? id, String? name});
 }
 
 /// @nodoc
@@ -1122,13 +1122,13 @@ class __$$MentorIdImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? sId = freezed,
+    Object? id = freezed,
     Object? name = freezed,
   }) {
     return _then(_$MentorIdImpl(
-      sId: freezed == sId
-          ? _value.sId
-          : sId // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String?,
       name: freezed == name
           ? _value.name
@@ -1141,19 +1141,19 @@ class __$$MentorIdImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$MentorIdImpl implements _MentorId {
-  const _$MentorIdImpl({this.sId, this.name});
+  const _$MentorIdImpl({this.id, this.name});
 
   factory _$MentorIdImpl.fromJson(Map<String, dynamic> json) =>
       _$$MentorIdImplFromJson(json);
 
   @override
-  final String? sId;
+  final String? id;
   @override
   final String? name;
 
   @override
   String toString() {
-    return 'MentorId(sId: $sId, name: $name)';
+    return 'MentorId(id: $id, name: $name)';
   }
 
   @override
@@ -1161,13 +1161,13 @@ class _$MentorIdImpl implements _MentorId {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MentorIdImpl &&
-            (identical(other.sId, sId) || other.sId == sId) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, sId, name);
+  int get hashCode => Object.hash(runtimeType, id, name);
 
   @JsonKey(ignore: true)
   @override
@@ -1184,14 +1184,14 @@ class _$MentorIdImpl implements _MentorId {
 }
 
 abstract class _MentorId implements MentorId {
-  const factory _MentorId({final String? sId, final String? name}) =
+  const factory _MentorId({final String? id, final String? name}) =
       _$MentorIdImpl;
 
   factory _MentorId.fromJson(Map<String, dynamic> json) =
       _$MentorIdImpl.fromJson;
 
   @override
-  String? get sId;
+  String? get id;
   @override
   String? get name;
   @override

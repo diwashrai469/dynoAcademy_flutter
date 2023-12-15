@@ -2,7 +2,9 @@ import 'package:dynoacademy/common/constant/app_dimens.dart';
 import 'package:dynoacademy/common/constant/ui_helpers.dart';
 import 'package:dynoacademy/common/utils/app_text_style.dart';
 import 'package:dynoacademy/common/utils/html_tags_remover.dart';
+import 'package:dynoacademy/common/widgets/k_bottomsheet.dart';
 import 'package:dynoacademy/common/widgets/k_button.dart';
+import 'package:dynoacademy/features/course_details/presentation/widgets/preview_courses_videos.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +21,7 @@ Widget courseDetailsList(
         children: [
           mHeightSpan,
           Text(
-            courseDataDetails?.courseName ?? '',
+            courseDataDetails?.course_name ?? '',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: primaryColor,
@@ -43,9 +45,20 @@ Widget courseDetailsList(
             ],
           ),
           mHeightSpan,
-          KButton(child: const Text("Preview Course"), onPressed: () {}),
+          KButton(
+            child: const Text("Preview Course"),
+            onPressed: () {
+              kBottonsheet(
+                  context,
+                  PreviewCourseVideos(
+                    courseId: courseDataDetails?.id ?? '',
+                    courseTitle: courseDataDetails?.course_name ?? '',
+                  ),
+                  true);
+            },
+          ),
           mHeightSpan,
-          Text(courseDataDetails?.courseInfo ?? ''),
+          Text(courseDataDetails?.course_info ?? ''),
           mHeightSpan,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,7 +72,7 @@ Widget courseDetailsList(
                     color: successColor,
                   ),
                   sWidthSpan,
-                  Text(courseDataDetails?.skillLevel ?? '')
+                  Text(courseDataDetails?.skillLevel ?? '--')
                 ],
               ),
               Row(
@@ -71,7 +84,7 @@ Widget courseDetailsList(
                   ),
                   sWidthSpan,
                   Text(
-                      "${courseDataDetails?.studentsEnrolled.toString()} Enrolls"),
+                      "${courseDataDetails?.students_enrolled ?? "-- "} Enrolls"),
                 ],
               ),
               Text(
@@ -83,7 +96,7 @@ Widget courseDetailsList(
               ),
             ],
           ),
-          elHeightSpan,
+          lHeightSpan,
           KButton(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -103,7 +116,7 @@ Widget courseDetailsList(
                   fontWeight: AppDimens.lfontweight,
                 ),
           ),
-          Text(removeHtmlTags(courseDataDetails?.courseDescription ?? ''))
+          Text(removeHtmlTags(courseDataDetails?.course_description ?? ''))
         ],
       ),
     ),

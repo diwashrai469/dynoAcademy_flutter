@@ -12,3 +12,9 @@ class GetSingleCourseDetails extends CourseDetailsEvent {
 
   const GetSingleCourseDetails({required this.slug});
 }
+
+class GetVideosPreview extends CourseDetailsEvent {
+  final String courseId;
+
+  const GetVideosPreview({required this.courseId});
+}
