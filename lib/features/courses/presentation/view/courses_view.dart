@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:dynoacademy/common/widgets/k_loading_indicator.dart';
 import 'package:dynoacademy/core/injection/injection.dart';
 import 'package:dynoacademy/features/courses/presentation/cubit/courses_cubit_cubit.dart';
+import 'package:dynoacademy/features/courses/presentation/widgets/course_listview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,8 +12,6 @@ class CourseView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("build called");
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Courses"),
@@ -26,22 +26,12 @@ class CourseView extends StatelessWidget {
       child: BlocBuilder<CoursesCubitCubit, CoursesCubitState>(
         builder: (_, state) {
           if (state is DataLoading) {
-            return const CircularProgressIndicator();
+            return Center(child: kLoadingIndicator(context: context));
           }
           if (state is DataLoaded) {
-            return Center(
-              child: Text(
-                state.courseResponseModel?.pageProps?.courseData?.data?.first
-                        .courseDescription ??
-                    '',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(color: Colors.black),
-              ),
-            );
+            return courseViewList(state: state, context: context);
           } else {
-            return const Text("Somthis went worng");
+            return const Center(child: Text("Somthing went wrong!"));
           }
         },
       ),

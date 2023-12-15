@@ -66,15 +66,16 @@ class DashboardView extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             fontSize: AppDimens.headlineFontSizeSmall,
-                            fontWeight: AppDimens.lfontweight),
+                            fontWeight: AppDimens.lfontweight,
+                            color: Colors.white),
                       ),
                       lHeightSpan,
                       Text(
                         "Improve your skills and knowledge by setting aside a few minutes each day to take advantage of the comprehensive and convenient on-demand video course platform.",
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              fontSize: AppDimens.headlineFontSizeXSmall,
-                            ),
+                            fontSize: AppDimens.headlineFontSizeXSmall,
+                            color: Colors.white),
                       ),
                       elHeightSpan,
                       KButton(
