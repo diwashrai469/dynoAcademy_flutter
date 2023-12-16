@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:injectable/injectable.dart';
-
 import "app_routers.gr.dart";
 
 @singleton
@@ -14,6 +13,9 @@ class AppRouters extends $AppRouters {
         ),
         AutoRoute(
           page: CourseDetails.page,
+        ),
+        AutoRoute(
+          page: PreviewCourseVideos.page,
         ),
       ];
 }

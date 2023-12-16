@@ -2,17 +2,20 @@ import 'package:dynoacademy/common/constant/app_dimens.dart';
 import 'package:dynoacademy/common/constant/ui_helpers.dart';
 import 'package:dynoacademy/common/utils/app_text_style.dart';
 import 'package:dynoacademy/common/utils/html_tags_remover.dart';
-import 'package:dynoacademy/common/widgets/k_bottomsheet.dart';
 import 'package:dynoacademy/common/widgets/k_button.dart';
-import 'package:dynoacademy/features/course_details/presentation/widgets/preview_courses_videos.dart';
+import 'package:dynoacademy/core/app_routers/app_routers.dart';
+import 'package:dynoacademy/core/app_routers/app_routers.gr.dart';
+import 'package:dynoacademy/core/injection/injection.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../bloc/course_details_bloc.dart';
 
 Widget courseDetailsList(
     {required CourseDetailsState state, required BuildContext context}) {
-  final courseDataDetails = state.courseResponseModel?.pageProps?.courseData;
+  final courseDataDetails =
+      state.courseDetailsResponseModel?.pageProps?.courseData;
   return SingleChildScrollView(
     child: Padding(
       padding: AppDimens.mainPagePadding,
@@ -21,7 +24,7 @@ Widget courseDetailsList(
         children: [
           mHeightSpan,
           Text(
-            courseDataDetails?.course_name ?? '',
+            courseDataDetails?.courseName ?? '',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: primaryColor,
@@ -30,35 +33,38 @@ Widget courseDetailsList(
                 ),
           ),
           lHeightSpan,
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(courseDataDetails?.thumbnail ?? ''),
-              ),
-              Positioned(
-                  top: 75.h,
-                  child: const CircleAvatar(
-                      backgroundColor: disabledColor,
-                      child: Icon(Icons.play_arrow)))
-            ],
+          GestureDetector(
+            onTap: () => locator<AppRouters>().push(
+              PreviewCourseVideos(
+                  courseId: courseDataDetails?.sId ?? '',
+                  courseTitle: courseDataDetails?.courseName ?? ''),
+            ),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(courseDataDetails?.thumbnail ?? ''),
+                ),
+                Positioned(
+                    top: 75.h,
+                    child: const CircleAvatar(
+                        backgroundColor: disabledColor,
+                        child: Icon(Icons.play_arrow)))
+              ],
+            ),
           ),
           mHeightSpan,
           KButton(
             child: const Text("Preview Course"),
-            onPressed: () {
-              kBottonsheet(
-                  context,
-                  PreviewCourseVideos(
-                    courseId: courseDataDetails?.id ?? '',
-                    courseTitle: courseDataDetails?.course_name ?? '',
-                  ),
-                  true);
-            },
+            onPressed: () => locator<AppRouters>().push(
+              PreviewCourseVideos(
+                  courseId: courseDataDetails?.sId ?? '',
+                  courseTitle: courseDataDetails?.courseName ?? ''),
+            ),
           ),
           mHeightSpan,
-          Text(courseDataDetails?.course_info ?? ''),
+          Text(courseDataDetails?.courseInfo ?? ''),
           mHeightSpan,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,7 +90,7 @@ Widget courseDetailsList(
                   ),
                   sWidthSpan,
                   Text(
-                      "${courseDataDetails?.students_enrolled ?? "-- "} Enrolls"),
+                      "${courseDataDetails?.studentsEnrolled ?? "-- "} Enrolls"),
                 ],
               ),
               Text(
@@ -116,7 +122,7 @@ Widget courseDetailsList(
                   fontWeight: AppDimens.lfontweight,
                 ),
           ),
-          Text(removeHtmlTags(courseDataDetails?.course_description ?? ''))
+          Text(removeHtmlTags(courseDataDetails?.courseDescription ?? ''))
         ],
       ),
     ),

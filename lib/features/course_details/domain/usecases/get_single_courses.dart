@@ -4,7 +4,7 @@ import 'package:dynoacademy/features/course_details/data/model/course_details_re
 import 'package:dynoacademy/features/course_details/data/model/course_videos_preview_response_model/course_videos_preview_response_model.dart';
 import 'package:injectable/injectable.dart';
 
-import '../repository/courses_repository.dart';
+import '../repository/courses_details_repository.dart';
 
 @injectable
 class GetSingleCourses {

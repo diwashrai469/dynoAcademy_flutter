@@ -12,13 +12,13 @@ import 'package:dynoacademy/core/app_routers/app_routers.dart' as _i3;
 import 'package:dynoacademy/core/services/intercepters.dart' as _i4;
 import 'package:dynoacademy/core/services/local_storage.dart' as _i5;
 import 'package:dynoacademy/core/services/toast_services.dart' as _i6;
-import 'package:dynoacademy/features/course_details/data/repository/course_repository_impl.dart'
+import 'package:dynoacademy/features/course_details/data/repository/course_details_repository_impl.dart'
     as _i10;
-import 'package:dynoacademy/features/course_details/data/services/courses_services.dart'
+import 'package:dynoacademy/features/course_details/data/services/courses_details_services.dart'
     as _i7;
-import 'package:dynoacademy/features/course_details/domain/repository/courses_repository.dart'
+import 'package:dynoacademy/features/course_details/domain/repository/courses_details_repository.dart'
     as _i9;
-import 'package:dynoacademy/features/course_details/domain/usecases/get_courses.dart'
+import 'package:dynoacademy/features/course_details/domain/usecases/get_single_courses.dart'
     as _i14;
 import 'package:dynoacademy/features/course_details/presentation/bloc/course_details_bloc.dart'
     as _i15;

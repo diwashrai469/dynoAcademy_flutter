@@ -42,7 +42,7 @@ abstract class AppThemes {
   //light theme
   static ThemeData light = ThemeData.light().copyWith(
     primaryColor: primaryColor,
-    cardColor: const Color(0xFFFFFFFF),
+    cardColor: const Color.fromRGBO(240, 240, 240, 1.0),
     drawerTheme:
         const DrawerThemeData(backgroundColor: lightThemescaffoldColor),
     textSelectionTheme: ThemeData.light().textSelectionTheme.copyWith(
