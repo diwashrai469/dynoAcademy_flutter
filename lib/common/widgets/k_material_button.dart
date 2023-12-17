@@ -4,14 +4,13 @@ import '../constant/app_dimens.dart';
 
 class KMaterialButton extends StatelessWidget {
   const KMaterialButton(
-      {Key? key,
+      {super.key,
       required this.child,
       this.color,
       this.textColor,
       this.bordercolor,
       required this.onKeyPressed,
-      this.height})
-      : super(key: key);
+      this.height});
   final Widget child;
   final Color? color;
   final double? height;

@@ -11,8 +11,8 @@ class KToast extends StatelessWidget {
   const KToast({
     required this.variant,
     required this.message,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   Color getColor(ToastVariant variant) {
     switch (variant) {

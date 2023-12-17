@@ -1,8 +1,11 @@
 class LoginResponseModel {
   String? status;
   List<Errors>? errors;
+  String? message;
+  String? accessToken;
 
-  LoginResponseModel({this.status, this.errors});
+  LoginResponseModel(
+      {this.status, this.errors, this.message, this.accessToken});
 
   LoginResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
@@ -12,6 +15,8 @@ class LoginResponseModel {
         errors!.add(Errors.fromJson(v));
       });
     }
+    message = json['message'];
+    accessToken = json['accessToken'];
   }
 
   Map<String, dynamic> toJson() {
@@ -20,6 +25,8 @@ class LoginResponseModel {
     if (errors != null) {
       data['errors'] = errors!.map((v) => v.toJson()).toList();
     }
+    data['message'] = message;
+    data['accessToken'] = accessToken;
     return data;
   }
 }

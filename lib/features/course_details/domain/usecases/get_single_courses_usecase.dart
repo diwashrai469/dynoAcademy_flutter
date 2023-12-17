@@ -7,10 +7,10 @@ import 'package:injectable/injectable.dart';
 import '../repository/courses_details_repository.dart';
 
 @injectable
-class GetSingleCourses {
+class GetSingleCoursesUsecase {
   final ICourseDetailsRepository iCourseDetailsRepository;
 
-  GetSingleCourses(this.iCourseDetailsRepository);
+  GetSingleCoursesUsecase(this.iCourseDetailsRepository);
 
   Future<Either<NetworkFailure, CourseDetailsResponseModel>> call(
       String slug) async {

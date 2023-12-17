@@ -1,7 +1,8 @@
 import 'dart:io';
+import 'package:dynoacademy/core/app_routers/app_routers.dart';
+import 'package:dynoacademy/core/injection/injection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../theme/app_theme.dart';
 import '../constant/app_dimens.dart';
 import '../constant/ui_helpers.dart';
@@ -127,7 +128,7 @@ class _DialogBoxContentState extends State<DialogBoxContent> {
                         textColor: secondaryColor,
                         // color: disabledColor,
                         onKeyPressed: () {
-                          Get.back();
+                          locator<AppRouters>().pop();
                         },
                         child: Text(
                           "Cancel",
@@ -227,7 +228,7 @@ class _IosDialogBoxContentState extends State<IosDialogBoxContent> {
                         fontWeight: FontWeight.w600,
                       ),
                 ),
-                onPressed: () => Get.back(),
+                onPressed: () => locator<AppRouters>().pop(),
               ),
             CupertinoDialogAction(
               child: Text(

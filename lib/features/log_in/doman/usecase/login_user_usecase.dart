@@ -5,10 +5,10 @@ import 'package:dynoacademy/features/log_in/doman/repository/login_repository.da
 import 'package:injectable/injectable.dart';
 
 @injectable
-class LoginUser {
+class LoginUserUsecase {
   final ILoginRepository iLoginRepository;
 
-  LoginUser(this.iLoginRepository);
+  LoginUserUsecase(this.iLoginRepository);
 
   Future<Either<NetworkFailure, LoginResponseModel>> call(
       {required String email, required String password}) async {

@@ -12,11 +12,11 @@ class AppDimens {
   static const appWidth = 360.0;
 
 //page padding
-  static const mainPagePadding = EdgeInsets.only(
-    right: 15,
-    left: 15,
+  static final mainPagePadding = const EdgeInsets.only(
+    right: 18,
+    left: 18,
     top: 7,
-  );
+  ).h;
 
 //circle avatar radius
   static const sssCircleAvatarRadius = 12.0;

@@ -5,10 +5,10 @@ import 'package:dynoacademy/features/courses/data/model/course_response_model/co
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetCourses {
+class GetCoursesUsecase {
   final ICoursesRepository iCoursesRepository;
 
-  GetCourses(this.iCoursesRepository);
+  GetCoursesUsecase(this.iCoursesRepository);
 
   Future<Either<NetworkFailure, CourseResponseModel>> call() async {
     return await iCoursesRepository.getCourses();

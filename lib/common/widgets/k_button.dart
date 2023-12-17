@@ -22,8 +22,8 @@ class KButton extends StatelessWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.bordered,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   double getFontSizeBySize(ButtonSize size) {
     switch (size) {

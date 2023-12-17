@@ -50,8 +50,7 @@ class KTextFormField extends StatefulWidget {
       this.initialValue,
       this.errorText,
       this.formatters,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   _KTextFormFieldState createState() => _KTextFormFieldState();

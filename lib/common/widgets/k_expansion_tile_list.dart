@@ -4,10 +4,10 @@ class KexpansionTileList extends StatelessWidget {
   final Widget title;
   final List<Widget> children;
   const KexpansionTileList({
-    Key? key,
+    super.key,
     required this.title,
     required this.children,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -10,16 +10,12 @@ class NetworkFailure extends DioException {
   NetworkFailureType networkFailureType = NetworkFailureType.message;
 
   NetworkFailure(
-      {required RequestOptions requestOptions,
+      {required super.requestOptions,
       Response? response,
       DioExceptionType type = DioExceptionType.unknown,
-      dynamic error,
+      dynamic super.error,
       this.message})
-      : super(
-            requestOptions: requestOptions,
-            error: error,
-            type: type,
-            response: response) {
+      : super(type: type, response: response) {
     switch (type) {
       case DioExceptionType.cancel:
         message = "Request Cancelled";

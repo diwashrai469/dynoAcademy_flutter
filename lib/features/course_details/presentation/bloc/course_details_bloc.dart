@@ -7,7 +7,7 @@ import 'package:dynoacademy/core/services/toast_services.dart';
 import 'package:dynoacademy/features/course_details/data/model/course_videos_preview_response_model/course_videos_preview_response_model.dart';
 
 
-import 'package:dynoacademy/features/course_details/domain/usecases/get_single_courses.dart';
+import 'package:dynoacademy/features/course_details/domain/usecases/get_single_courses_usecase.dart';
 
 
 import 'package:equatable/equatable.dart';
@@ -32,13 +32,13 @@ part 'course_details_state.dart';
 
 class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
 
-  final GetSingleCourses _getSingleCourses;
+  final GetSingleCoursesUsecase _getSingleCoursesUsecase;
 
 
   final ToastService _toastService;
 
 
-  CourseDetailsBloc(this._getSingleCourses, this._toastService)
+  CourseDetailsBloc(this._getSingleCoursesUsecase, this._toastService)
 
       : super(CourseDetailsEmpty()) {
 
@@ -52,26 +52,50 @@ class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
 
   }
 
+
   void _handlechangeVideoUrl(
+
       ChangeVideoUrl event, Emitter<CourseDetailsState> emit) async {
+
     // Retrieve the current state
+
+
     CourseDetailsState currentState = state;
 
+
     // Check if the current state is an instance of CourseVideoPreviewLoaded
+
+
     if (currentState is CourseVideoPreviewLoaded) {
+
       // Create a new instance of CourseVideoPreviewLoaded with the updated video URL
+
+
       CourseDetailsState newState = CourseVideoPreviewLoaded(
+
         videoUrl: event.videoUrl,
+
         courseVideosPreviewResponseModel:
+
             currentState.courseVideosPreviewResponseModel,
+
       );
 
+
       // Emit the new state
+
+
       emit(newState);
+
     } else {
+
       // If the current state is not CourseVideoPreviewLoaded, emit the SelectedVideoUrl state
+
+
       emit(SelectedVideoUrl(selectedVideoUrl: event.videoUrl));
+
     }
+
   }
 
 
@@ -82,7 +106,7 @@ class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
     emit(CourseDetailsLoading());
 
 
-    var result = await _getSingleCourses.call(event.slug);
+    var result = await _getSingleCoursesUsecase.call(event.slug);
 
 
     result.fold(
@@ -115,7 +139,7 @@ class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
     emit(CourseDetailsLoading());
 
 
-    var result = await _getSingleCourses.getVideoPreview(event.courseId);
+    var result = await _getSingleCoursesUsecase.getVideoPreview(event.courseId);
 
 
     result.fold(

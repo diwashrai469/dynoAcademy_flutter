@@ -1,41 +1,42 @@
 import 'package:dio/dio.dart';
+import 'package:dynoacademy/core/app_routers/app_routers.dart';
+import 'package:dynoacademy/core/app_routers/app_routers.gr.dart';
 import 'package:injectable/injectable.dart';
 import 'local_storage.dart';
 import 'network_services.dart';
 
 @injectable
 class DioService {
-  Dio getDioInstance() {
-    Dio dio = Dio(
-      BaseOptions(
-        baseUrl: "https://dynoacademy.com",
-      ),
-    );
-
-    dio.interceptors.add(
+  late final Dio _dio;
+  Dio get http => _dio;
+  final LocalStorageService _localStorageService;
+  final AppRouters _appRouters;
+  DioService(this._appRouters, this._localStorageService) {
+    _dio = Dio();
+    _dio.options.baseUrl = "https://dynoacademy.com";
+    _dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (options, handler) async {
-          final token = LocalStorageService().read(
-            LocalStorageKeys.accessToken,
-          );
-
+        onRequest: (options, handler) {
+          String? token =
+              _localStorageService.read(LocalStorageKeys.accessToken);
           if (token != null) {
             options.headers['Authorization'] = "Bearer $token";
-            // options.headers['version'] = serverAppVersion;
           }
-
-          return handler.next(options);
+          return handler.next(options); //continue
         },
         onResponse: (response, handler) {
-          return handler.next(response);
+          return handler.next(response); // continue
         },
         onError: (DioException e, handler) {
           if (e.type == DioExceptionType.badResponse) {
             if (e.response!.statusCode == 401) {
-              LocalStorageService().clear(LocalStorageKeys.accessToken);
+              _localStorageService.clear(LocalStorageKeys.accessToken);
 
               Future.delayed(const Duration(milliseconds: 100), () {
-                // Get.off(() => const LoginView());
+                _appRouters.pushAndPopUntil(
+                  const LoginView(),
+                  predicate: (route) => false,
+                );
               });
             }
           }
@@ -49,7 +50,5 @@ class DioService {
         },
       ),
     );
-
-    return dio;
   }
 }
