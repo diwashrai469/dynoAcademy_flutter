@@ -42,15 +42,20 @@ Widget courseDetailsList(
             child: Stack(
               alignment: Alignment.center,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(courseDataDetails?.thumbnail ?? ''),
+                Hero(
+                  tag: courseDataDetails?.sId ?? '',
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(courseDataDetails?.thumbnail ?? ''),
+                  ),
                 ),
                 Positioned(
-                    top: 75.h,
-                    child: const CircleAvatar(
-                        backgroundColor: disabledColor,
-                        child: Icon(Icons.play_arrow)))
+                  top: 75.h,
+                  child: const CircleAvatar(
+                    backgroundColor: disabledColor,
+                    child: Icon(Icons.play_arrow),
+                  ),
+                )
               ],
             ),
           ),
@@ -122,7 +127,9 @@ Widget courseDetailsList(
                   fontWeight: AppDimens.lfontweight,
                 ),
           ),
-          Text(removeHtmlTags(courseDataDetails?.courseDescription ?? ''))
+          Text(
+            removeHtmlTags(courseDataDetails?.courseDescription ?? ''),
+          )
         ],
       ),
     ),

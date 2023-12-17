@@ -41,9 +41,10 @@ class DashboardView extends StatelessWidget {
         ),
         actions: [
           const CircleAvatar(
+            backgroundColor: Colors.deepPurple,
             child: Icon(
               Icons.person,
-              color: primaryColor,
+              color: Colors.white,
             ),
           ),
           mWidthSpan,

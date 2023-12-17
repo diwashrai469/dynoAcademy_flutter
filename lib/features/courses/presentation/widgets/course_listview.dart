@@ -56,12 +56,16 @@ Widget courseViewList(
                   ),
                   child: Column(
                     children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
+                      Hero(
+                        tag: courseDataIndex?.sId ?? '',
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                          child:
+                              Image.network(courseDataIndex?.thumbnail ?? ''),
                         ),
-                        child: Image.network(courseDataIndex?.thumbnail ?? ''),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
