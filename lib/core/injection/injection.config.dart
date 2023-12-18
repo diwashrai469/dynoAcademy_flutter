@@ -67,8 +67,10 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.lazySingleton<_i7.JwtTokenDecoderService>(
         () => _i7.JwtTokenDecoderService(gh<_i4.LocalStorageService>()));
-    gh.factory<_i8.LoginServices>(
-        () => _i8.LoginServices(gh<_i6.DioService>()));
+    gh.factory<_i8.LoginServices>(() => _i8.LoginServices(
+          gh<_i6.DioService>(),
+          gh<_i5.ToastService>(),
+        ));
     gh.factory<_i9.CourseDetailsServices>(
         () => _i9.CourseDetailsServices(gh<_i6.DioService>()));
     gh.factory<_i10.CoursesServices>(

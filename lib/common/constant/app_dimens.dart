@@ -41,27 +41,27 @@ class AppDimens {
   static const inputBorderRadius = BorderRadius.all(Radius.circular(0));
   static const inputPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 8);
   static const chipPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 4);
-  static const buttonFontSizeXSmall = 14.0;
-  static const buttonFontSizeSmall = 15.0;
-  static const buttonFontSizeMedium = 16.0;
-  static const buttonFontSizeLarge = 17.0;
+  static final buttonFontSizeXSmall = 14.0.h;
+  static final buttonFontSizeSmall = 15.0.h;
+  static final buttonFontSizeMedium = 16.0.h;
+  static final buttonFontSizeLarge = 17.0.h;
 
-  static const iconButtonSizeSmall = 24.0;
-  static const iconButtonSizeLarge = 32.0;
+  static final iconButtonSizeSmall = 24.0.h;
+  static final iconButtonSizeLarge = 32.0.h;
 
 //boarder radius
-  static const sboarderRadisCircular = 8.0;
+  static final sboarderRadisCircular = 8.0.r;
 
-  static const buttonPaddingXSmall =
-      EdgeInsets.symmetric(horizontal: 16, vertical: 8);
-  static const buttonPaddingSmall =
-      EdgeInsets.symmetric(horizontal: 20, vertical: 12);
-  static const buttonPaddingMedium =
-      EdgeInsets.symmetric(horizontal: 22, vertical: 16);
-  static const buttonPaddingLarge =
-      EdgeInsets.symmetric(horizontal: 32, vertical: 24);
+  static final buttonPaddingXSmall =
+      const EdgeInsets.symmetric(horizontal: 16, vertical: 8).h;
+  static final buttonPaddingSmall =
+      const EdgeInsets.symmetric(horizontal: 20, vertical: 12).h;
+  static final buttonPaddingMedium =
+      const EdgeInsets.symmetric(horizontal: 22, vertical: 16).h;
+  static final buttonPaddingLarge =
+      const EdgeInsets.symmetric(horizontal: 32, vertical: 24).h;
 
-  static const double titleFontSize = 16;
+  static final double titleFontSize = 16.sp;
 
   //text fontweight
   static const FontWeight sfontweight = FontWeight.w300;

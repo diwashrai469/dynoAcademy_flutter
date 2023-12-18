@@ -15,7 +15,7 @@ class LoginRepositoryImpl extends ILoginRepository {
       {required String email, required String password}) async {
     try {
       var result = await _loginServices.login(email, password);
-      return Right(result);
+      return Right(result!);
     } on NetworkFailure catch (e) {
       return Left(e);
     }

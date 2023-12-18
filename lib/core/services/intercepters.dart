@@ -13,7 +13,7 @@ class DioService {
   final AppRouters _appRouters;
   DioService(this._appRouters, this._localStorageService) {
     _dio = Dio();
-    _dio.options.baseUrl = "https://dynoacademy.com";
+    _dio.options.baseUrl = "https://api.dynoacademy.com/api";
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {

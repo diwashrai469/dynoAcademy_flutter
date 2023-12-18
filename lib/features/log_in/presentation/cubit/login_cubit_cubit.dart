@@ -56,9 +56,6 @@ class LogincubitCubit extends Cubit<LoginCubitCubitState> {
 
   loginUser({required String email, required String password}) async {
 
-    emit(LoginisLoading());
-
-
     var result = await _loginUserUsecase.call(email: email, password: password);
 
 
@@ -78,8 +75,6 @@ class LogincubitCubit extends Cubit<LoginCubitCubitState> {
         _localStorageService.write(
 
             LocalStorageKeys.accessToken, data.accessToken);
-
-        print(data.accessToken);
 
 
         _appRouters.push(const DashboardView());

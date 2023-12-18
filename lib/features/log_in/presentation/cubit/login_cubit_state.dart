@@ -1,6 +1,5 @@
 part of 'login_cubit_cubit.dart';
 
-
 sealed class LoginCubitCubitState extends Equatable {
 
   const LoginCubitCubitState();
@@ -15,6 +14,11 @@ sealed class LoginCubitCubitState extends Equatable {
 
 final class DataLoading extends LoginCubitCubitState {}
 
+class SignIsLoading extends LoginCubitCubitState {
+  final bool isloading;
 
-final class LoginisLoading extends LoginCubitCubitState {}
+
+  const SignIsLoading(this.isloading);
+
+}
 

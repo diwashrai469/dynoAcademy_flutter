@@ -1,5 +1,6 @@
 import 'package:dynoacademy/common/widgets/k_loading_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../theme/app_theme.dart';
 import '../constant/app_dimens.dart';
 import '../constant/ui_helpers.dart';
@@ -54,26 +55,26 @@ class KButton extends StatelessWidget {
   double getProgressRadiusByButtonSize(ButtonSize size) {
     switch (size) {
       case ButtonSize.xSmall:
-        return 16;
+        return 16.h;
       case ButtonSize.small:
-        return 18;
+        return 18.h;
       case ButtonSize.medium:
-        return 20;
+        return 20.h;
       case ButtonSize.large:
-        return 22;
+        return 22.h;
     }
   }
 
   double getProgressWidthByButtonSize(ButtonSize size) {
     switch (size) {
       case ButtonSize.xSmall:
-        return 2;
+        return 2.h;
       case ButtonSize.small:
-        return 2;
+        return 2.h;
       case ButtonSize.medium:
-        return 3;
+        return 3.h;
       case ButtonSize.large:
-        return 3;
+        return 3.h;
     }
   }
 
@@ -101,7 +102,7 @@ class KButton extends StatelessWidget {
             side: (bordered ?? false)
                 ? const BorderSide(color: disabledColor)
                 : BorderSide.none,
-            borderRadius: const BorderRadius.all(
+            borderRadius: BorderRadius.all(
               Radius.circular(AppDimens.sboarderRadisCircular),
             ),
           ),
