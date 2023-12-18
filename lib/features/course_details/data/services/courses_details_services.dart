@@ -12,7 +12,7 @@ class CourseDetailsServices {
 
   Future<CourseDetailsResponseModel> getSingleCourse(String slug) async {
     var response = await _httpService.http.get(
-        "/_next/data/9NUMGI0YF3QB6vluXUC9a/view-course/$slug.json?view_course_slug=$slug");
+        "https://dynoacademy.com/_next/data/9NUMGI0YF3QB6vluXUC9a/view-course/$slug.json?view_course_slug=$slug");
 
     return CourseDetailsResponseModel.fromJson(response.data);
   }

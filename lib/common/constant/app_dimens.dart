@@ -27,10 +27,10 @@ class AppDimens {
   static const elCircleAvatarRadius = 30.0;
   static const boarderAvatarCircleRaduis = 26.0;
 
-  static const pagePadding = EdgeInsets.all(20);
-  static const pagePaddingX = EdgeInsets.symmetric(horizontal: 20);
-  static const pagePaddingY = EdgeInsets.symmetric(vertical: 20);
-  static const pagePaddingLarge = EdgeInsets.all(32);
+  static final pagePadding = const EdgeInsets.all(20).h;
+  static final pagePaddingX = EdgeInsets.symmetric(horizontal: 20.w);
+  static final pagePaddingY = const EdgeInsets.symmetric(vertical: 20).h;
+  static final pagePaddingLarge = const EdgeInsets.all(32).h;
 
   static const globalCircularRadius = Radius.circular(12.0);
 
@@ -39,8 +39,10 @@ class AppDimens {
   static const double cardPaddingSize = 20;
   static const cardPadding = EdgeInsets.all(cardPaddingSize);
   static const inputBorderRadius = BorderRadius.all(Radius.circular(0));
-  static const inputPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 8);
-  static const chipPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 4);
+  static final inputPadding =
+      EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h);
+  static final chipPadding =
+      EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h);
   static final buttonFontSizeXSmall = 14.0.h;
   static final buttonFontSizeSmall = 15.0.h;
   static final buttonFontSizeMedium = 16.0.h;
@@ -53,13 +55,13 @@ class AppDimens {
   static final sboarderRadisCircular = 8.0.r;
 
   static final buttonPaddingXSmall =
-      const EdgeInsets.symmetric(horizontal: 16, vertical: 8).h;
+      EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h);
   static final buttonPaddingSmall =
-      const EdgeInsets.symmetric(horizontal: 20, vertical: 12).h;
+      EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h);
   static final buttonPaddingMedium =
-      const EdgeInsets.symmetric(horizontal: 22, vertical: 16).h;
+      EdgeInsets.symmetric(horizontal: 22.w, vertical: 16.h);
   static final buttonPaddingLarge =
-      const EdgeInsets.symmetric(horizontal: 32, vertical: 24).h;
+      EdgeInsets.symmetric(horizontal: 32.w, vertical: 24.h);
 
   static final double titleFontSize = 16.sp;
 

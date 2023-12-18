@@ -26,6 +26,7 @@ class LoginView extends StatelessWidget {
         create: (context) => locator<LogincubitCubit>(),
         child: BlocBuilder<LogincubitCubit, LoginCubitCubitState>(
           builder: (context, state) {
+            final loginCubit = context.read<LogincubitCubit>();
             return SafeArea(
               child: Form(
                 key: formKey,
@@ -81,11 +82,12 @@ class LoginView extends StatelessWidget {
                           ),
                           lHeightSpan,
                           KButton(
+                            size: ButtonSize.medium,
                             isBusy: state is DataLoading,
                             child: const Text("Sign in"),
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                context.read<LogincubitCubit>().loginUser(
+                                loginCubit.loginUser(
                                     email: emailController.text,
                                     password: passwordController.text);
                               }
@@ -93,15 +95,8 @@ class LoginView extends StatelessWidget {
                           ),
                           mHeightSpan,
                           Switch(
-                            onChanged: (value) {
-                              print(
-                                state is SwitchOn,
-                              );
-
-                              context
-                                  .read<LogincubitCubit>()
-                                  .toggleSwitch(value);
-                            },
+                            onChanged: (value) =>
+                                loginCubit.toggleSwitch(value),
                             value: state is SwitchOn,
                             activeColor: Colors.blue,
                             activeTrackColor: Colors.yellow,
