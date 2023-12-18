@@ -81,15 +81,32 @@ class LoginView extends StatelessWidget {
                           ),
                           lHeightSpan,
                           KButton(
+                            isBusy: state is DataLoading,
                             child: const Text("Sign in"),
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
-                                BlocProvider.of<LogincubitCubit>(context)
-                                    .loginUser(
-                                        email: emailController.text,
-                                        password: passwordController.text);
+                                context.read<LogincubitCubit>().loginUser(
+                                    email: emailController.text,
+                                    password: passwordController.text);
                               }
                             },
+                          ),
+                          mHeightSpan,
+                          Switch(
+                            onChanged: (value) {
+                              print(
+                                state is SwitchOn,
+                              );
+
+                              context
+                                  .read<LogincubitCubit>()
+                                  .toggleSwitch(value);
+                            },
+                            value: state is SwitchOn,
+                            activeColor: Colors.blue,
+                            activeTrackColor: Colors.yellow,
+                            inactiveThumbColor: Colors.redAccent,
+                            inactiveTrackColor: Colors.orange,
                           )
                         ],
                       ),

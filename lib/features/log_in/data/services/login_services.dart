@@ -19,7 +19,7 @@ class LoginServices {
       );
       return LoginResponseModel.fromJson(response.data);
     } catch (e) {
-      _toastService.e(e.toString());
+      _toastService.e("Wrong Username or Password!.");
       rethrow;
     }
   }
