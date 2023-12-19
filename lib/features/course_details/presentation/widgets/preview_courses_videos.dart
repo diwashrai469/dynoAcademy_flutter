@@ -92,6 +92,9 @@ Widget buildContent(
                   state.courseVideosPreviewResponseModel?.data?[index];
 
               return Card(
+                color: previewVideoIndex?.lessonVideoUrl == state.videoUri
+                    ? Colors.blue.shade200
+                    : null,
                 child: ListTile(
                   onTap: () {
                     BlocProvider.of<CourseDetailsBloc>(context).add(

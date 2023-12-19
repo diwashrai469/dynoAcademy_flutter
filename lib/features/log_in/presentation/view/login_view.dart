@@ -30,80 +30,83 @@ class LoginView extends StatelessWidget {
             return SafeArea(
               child: Form(
                 key: formKey,
-                child: Padding(
-                  padding: AppDimens.mainPagePadding,
-                  child: Center(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            AppImage.logoName,
-                            color: primaryColor,
-                          ),
-                          elHeightSpan,
-                          KTextFormField(
-                            controller: emailController,
-                            label: "Email",
-                            required: true,
-                            hint: "Enter your email.",
-                            validator: (value) {
-                              if (value?.isEmpty == true ||
-                                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                      .hasMatch(value ?? '')) {
-                                return 'Enter a valid email!';
-                              }
-                              return null;
-                            },
-                          ),
-                          sHeightSpan,
-                          KTextFormField(
-                            controller: passwordController,
-                            label: "Password",
-                            hint: "Enter your password.",
-                            required: true,
-                            obscureText: true,
-                            validator: (value) {
-                              if (value?.isEmpty == true) {
-                                return 'Enter a valid password!';
-                              }
-                              return null;
-                            },
-                          ),
-                          mHeightSpan,
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              "Forget password?",
-                              style: appTextStyle(context)?.copyWith(
-                                  color: primaryColor,
-                                  fontWeight: AppDimens.lfontweight),
+                child: Hero(
+                  tag: AppImage.logoName,
+                  child: Padding(
+                    padding: AppDimens.mainPagePadding,
+                    child: Center(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              AppImage.logoName,
+                              color: primaryColor,
                             ),
-                          ),
-                          lHeightSpan,
-                          KButton(
-                            size: ButtonSize.medium,
-                            isBusy: state is DataLoading,
-                            child: const Text("Sign in"),
-                            onPressed: () {
-                              if (formKey.currentState!.validate()) {
-                                loginCubit.loginUser(
-                                    email: emailController.text,
-                                    password: passwordController.text);
-                              }
-                            },
-                          ),
-                          mHeightSpan,
-                          Switch(
-                            onChanged: (value) =>
-                                loginCubit.toggleSwitch(value),
-                            value: state is SwitchOn,
-                            activeColor: Colors.blue,
-                            activeTrackColor: Colors.yellow,
-                            inactiveThumbColor: Colors.redAccent,
-                            inactiveTrackColor: Colors.orange,
-                          )
-                        ],
+                            elHeightSpan,
+                            KTextFormField(
+                              controller: emailController,
+                              label: "Email",
+                              required: true,
+                              hint: "Enter your email.",
+                              validator: (value) {
+                                if (value?.isEmpty == true ||
+                                    !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        .hasMatch(value ?? '')) {
+                                  return 'Enter a valid email!';
+                                }
+                                return null;
+                              },
+                            ),
+                            sHeightSpan,
+                            KTextFormField(
+                              controller: passwordController,
+                              label: "Password",
+                              hint: "Enter your password.",
+                              required: true,
+                              obscureText: true,
+                              validator: (value) {
+                                if (value?.isEmpty == true) {
+                                  return 'Enter a valid password!';
+                                }
+                                return null;
+                              },
+                            ),
+                            mHeightSpan,
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                "Forget password?",
+                                style: appTextStyle(context)?.copyWith(
+                                    color: primaryColor,
+                                    fontWeight: AppDimens.lfontweight),
+                              ),
+                            ),
+                            lHeightSpan,
+                            KButton(
+                              size: ButtonSize.medium,
+                              isBusy: state is DataLoading,
+                              child: const Text("Sign in"),
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  loginCubit.loginUser(
+                                      email: emailController.text,
+                                      password: passwordController.text);
+                                }
+                              },
+                            ),
+                            mHeightSpan,
+                            Switch(
+                              onChanged: (value) =>
+                                  loginCubit.toggleSwitch(value),
+                              value: state is SwitchOn,
+                              activeColor: Colors.blue,
+                              activeTrackColor: Colors.yellow,
+                              inactiveThumbColor: Colors.redAccent,
+                              inactiveTrackColor: Colors.orange,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

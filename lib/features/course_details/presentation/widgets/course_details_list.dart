@@ -36,14 +36,14 @@ Widget courseDetailsList(
           GestureDetector(
             onTap: () => locator<AppRouters>().push(
               PreviewCourseVideos(
-                  courseId: courseDataDetails?.sId ?? '',
+                  courseId: courseDataDetails?.id ?? '',
                   courseTitle: courseDataDetails?.courseName ?? ''),
             ),
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Hero(
-                  tag: courseDataDetails?.sId ?? '',
+                  tag: courseDataDetails?.id ?? '',
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.network(courseDataDetails?.thumbnail ?? ''),
@@ -64,7 +64,7 @@ Widget courseDetailsList(
             child: const Text("Preview Course"),
             onPressed: () => locator<AppRouters>().push(
               PreviewCourseVideos(
-                  courseId: courseDataDetails?.sId ?? '',
+                  courseId: courseDataDetails?.id ?? '',
                   courseTitle: courseDataDetails?.courseName ?? ''),
             ),
           ),

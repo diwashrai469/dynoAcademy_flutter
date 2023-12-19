@@ -3,15 +3,12 @@ part of 'courses_cubit_cubit.dart';
 
 sealed class CoursesCubitState extends Equatable {
 
-  final CourseResponseModel? courseResponseModel;
-
-
-  const CoursesCubitState({this.courseResponseModel});
+  const CoursesCubitState();
 
 
   @override
 
-  List<Object> get props => [courseResponseModel ?? {}];
+  List<Object> get props => [];
 
 }
 
@@ -21,9 +18,13 @@ final class DataLoading extends CoursesCubitState {}
 
 class DataLoaded extends CoursesCubitState {
 
-  const DataLoaded(CourseResponseModel courseResponseModel)
+  final CourseResponseModel? courseResponseModel;
 
-      : super(courseResponseModel: courseResponseModel);
+
+  final List<String?>? userId;
+
+
+  const DataLoaded({this.courseResponseModel, this.userId});
 
 }
 

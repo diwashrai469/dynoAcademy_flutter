@@ -5,6 +5,7 @@ import 'package:dynoacademy/common/constant/app_image.dart';
 import 'package:dynoacademy/common/constant/ui_helpers.dart';
 import 'package:dynoacademy/common/utils/app_text_style.dart';
 import 'package:dynoacademy/common/widgets/k_button.dart';
+import 'package:dynoacademy/common/widgets/k_popupmenuitems.dart';
 import 'package:dynoacademy/core/app_routers/app_routers.dart';
 import 'package:dynoacademy/core/app_routers/app_routers.gr.dart';
 import 'package:dynoacademy/core/injection/injection.dart';
@@ -13,6 +14,7 @@ import 'package:dynoacademy/core/services/local_storage.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../widget/animation_image.dart';
 
 @RoutePage()
 class DashboardView extends StatelessWidget {
@@ -22,17 +24,16 @@ class DashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     final acessToken =
         locator<LocalStorageService>().read(LocalStorageKeys.accessToken);
-    final jwtDecoder = locator<JwtTokenDecoderService>().customDecodeJwt();
-    TextStyle titleTextstyle = Theme.of(context).textTheme.bodyMedium!.copyWith(
-        fontSize: AppDimens.headlineFontSizeSmall1,
+
+    TextStyle titleTextstyle = appTextStyle(context)!.copyWith(
+        fontSize: AppDimens.headlineFontSizeSSmall,
         color: primaryColor,
         fontWeight: AppDimens.lfontweight);
-    TextStyle subtitleTextstyle =
-        Theme.of(context).textTheme.bodyMedium!.copyWith(
-              fontSize: AppDimens.headlineFontSizeXSmall,
-              color: cursorColor,
-            );
-    double iconSize = 37.h;
+    TextStyle subtitleTextstyle = appTextStyle(context)!.copyWith(
+      fontSize: AppDimens.headlineFontSizeXSmall,
+      color: cursorColor,
+    );
+    double iconSize = 35.h;
     return Scaffold(
       drawer: const Drawer(
         child: Column(
@@ -46,18 +47,9 @@ class DashboardView extends StatelessWidget {
           width: AppImage.xxlogowidth,
         ),
         actions: [
-          CircleAvatar(
-            backgroundColor: Colors.deepPurple,
-            child: acessToken?.isNotEmpty == true
-                ? Text(
-                    jwtDecoder['name'][0],
-                    style: appTextStyle(context)?.copyWith(
-                        color: Colors.white, fontWeight: AppDimens.lfontweight),
-                  )
-                : const Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
+          _kdropDown(
+            context,
+            acessToken ?? '',
           ),
           mWidthSpan,
         ],
@@ -77,7 +69,7 @@ class DashboardView extends StatelessWidget {
                       Text(
                         "Nepali tech courses with expert instruction.",
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        style: appTextStyle(context)?.copyWith(
                             fontSize: AppDimens.headlineFontSizeSmall,
                             fontWeight: AppDimens.lfontweight,
                             color: Colors.white),
@@ -86,41 +78,36 @@ class DashboardView extends StatelessWidget {
                       Text(
                         "Improve your skills and knowledge by setting aside a few minutes each day to take advantage of the comprehensive and convenient on-demand video course platform.",
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        style: appTextStyle(context)?.copyWith(
                             fontSize: AppDimens.headlineFontSizeXSmall,
                             color: Colors.white),
                       ),
                       elHeightSpan,
                       KButton(
-                          backgroundColor: darkSucessColor,
-                          child: Row(
-                            children: [
-                              Text(
-                                "Browse Course",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                        fontWeight: AppDimens.lfontweight,
-                                        color: Colors.white),
-                              ),
-                              sWidthSpan,
-                              const Icon(Icons.arrow_forward)
-                            ],
-                          ),
-                          onPressed: () {
-                            locator<AppRouters>().push(const CourseView());
-                          }),
+                        backgroundColor: darkSucessColor,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Browse Course",
+                              style: appTextStyle(context)?.copyWith(
+                                  fontWeight: AppDimens.lfontweight,
+                                  color: Colors.white),
+                            ),
+                            sWidthSpan,
+                            const Icon(Icons.arrow_forward)
+                          ],
+                        ),
+                        onPressed: () =>
+                            locator<AppRouters>().push(const CourseView()),
+                      ),
                       mHeightSpan,
-                      Image.asset(
-                        AppImage.dashboardGirl,
-                      )
+                      const AnimationImage()
                     ],
                   ),
                 ),
               ),
             ),
-            mHeightSpan,
+            sHeightSpan,
             ListTile(
               leading: Icon(
                 Icons.restart_alt_rounded,
@@ -162,4 +149,59 @@ class DashboardView extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _kdropDown(
+  BuildContext context,
+  String acessToken,
+) {
+  final jwtDecoder = locator<JwtTokenDecoderService>().customDecodeJwt();
+  return kPopupMenuItems(
+    onSelected: (String option) {
+      if (option == 'Log out') {
+        locator<LocalStorageService>().clear(LocalStorageKeys.accessToken);
+        locator<AppRouters>().pushAndPopUntil(
+          const LoginView(),
+          predicate: (route) => false,
+        );
+      }
+    },
+    itemBuilder: (BuildContext context) {
+      return [
+        PopupMenuItem<String>(
+          height: 20,
+          padding: const EdgeInsets.all(8),
+          value: 'Log out',
+          child: Row(
+            children: [
+              const Icon(
+                Icons.login,
+                color: darkErrorColor,
+              ),
+              sWidthSpan,
+              Text(
+                "Log out",
+                style: appTextStyle(context)?.copyWith(
+                    fontSize: AppDimens.headlineFontSizeXSmall,
+                    color: darkErrorColor),
+              )
+            ],
+          ),
+        ),
+      ];
+    },
+    child: CircleAvatar(
+      backgroundColor: Colors.deepPurple,
+      child: acessToken.isNotEmpty == true
+          ? Text(
+              jwtDecoder['name'][0],
+              style: appTextStyle(context)?.copyWith(
+                  color: Colors.white, fontWeight: AppDimens.lfontweight),
+            )
+          : const Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
+    ),
+  );
 }

@@ -10,7 +10,8 @@ import 'package:dynoacademy/features/courses/presentation/cubit/courses_cubit_cu
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget courseViewList(
-    {required CoursesCubitState state, required BuildContext context}) {
+    {required DataLoaded state, required BuildContext context}) {
+  print(state.userId);
   return SingleChildScrollView(
     child: Padding(
       padding: AppDimens.mainPagePadding,

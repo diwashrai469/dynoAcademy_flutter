@@ -62,7 +62,19 @@ class CoursesCubitCubit extends Cubit<CoursesCubitState> {
 
       (CourseResponseModel data) async {
 
-        emit(DataLoaded(data));
+        final listOfIds = data.pageProps?.courseData?.data
+
+            ?.map((e) => e.sId)
+
+            .where((id) => id != null)
+
+            .toList();
+
+
+        emit(DataLoaded(
+          courseResponseModel: data,
+          userId: listOfIds,
+        ));
 
       },
 
