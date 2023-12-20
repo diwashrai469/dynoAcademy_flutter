@@ -11,7 +11,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget courseViewList(
     {required DataLoaded state, required BuildContext context}) {
-  print(state.userId);
   return SingleChildScrollView(
     child: Padding(
       padding: AppDimens.mainPagePadding,

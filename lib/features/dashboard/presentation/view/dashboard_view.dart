@@ -5,12 +5,11 @@ import 'package:dynoacademy/common/constant/app_image.dart';
 import 'package:dynoacademy/common/constant/ui_helpers.dart';
 import 'package:dynoacademy/common/utils/app_text_style.dart';
 import 'package:dynoacademy/common/widgets/k_button.dart';
-import 'package:dynoacademy/common/widgets/k_popupmenuitems.dart';
 import 'package:dynoacademy/core/app_routers/app_routers.dart';
 import 'package:dynoacademy/core/app_routers/app_routers.gr.dart';
 import 'package:dynoacademy/core/injection/injection.dart';
-import 'package:dynoacademy/core/services/jwt_token_decoder_service.dart';
 import 'package:dynoacademy/core/services/local_storage.dart';
+import 'package:dynoacademy/features/dashboard/presentation/widget/k_drop_down.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,11 +34,6 @@ class DashboardView extends StatelessWidget {
     );
     double iconSize = 35.h;
     return Scaffold(
-      drawer: const Drawer(
-        child: Column(
-          children: [Text("drawer")],
-        ),
-      ),
       appBar: AppBar(
         elevation: 10.h,
         title: Image.asset(
@@ -47,7 +41,7 @@ class DashboardView extends StatelessWidget {
           width: AppImage.xxlogowidth,
         ),
         actions: [
-          _kdropDown(
+          kdropDown(
             context,
             acessToken ?? '',
           ),
@@ -149,59 +143,4 @@ class DashboardView extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _kdropDown(
-  BuildContext context,
-  String acessToken,
-) {
-  final jwtDecoder = locator<JwtTokenDecoderService>().customDecodeJwt();
-  return kPopupMenuItems(
-    onSelected: (String option) {
-      if (option == 'Log out') {
-        locator<LocalStorageService>().clear(LocalStorageKeys.accessToken);
-        locator<AppRouters>().pushAndPopUntil(
-          const LoginView(),
-          predicate: (route) => false,
-        );
-      }
-    },
-    itemBuilder: (BuildContext context) {
-      return [
-        PopupMenuItem<String>(
-          height: 20,
-          padding: const EdgeInsets.all(8),
-          value: 'Log out',
-          child: Row(
-            children: [
-              const Icon(
-                Icons.login,
-                color: darkErrorColor,
-              ),
-              sWidthSpan,
-              Text(
-                "Log out",
-                style: appTextStyle(context)?.copyWith(
-                    fontSize: AppDimens.headlineFontSizeXSmall,
-                    color: darkErrorColor),
-              )
-            ],
-          ),
-        ),
-      ];
-    },
-    child: CircleAvatar(
-      backgroundColor: Colors.deepPurple,
-      child: acessToken.isNotEmpty == true
-          ? Text(
-              jwtDecoder['name'][0],
-              style: appTextStyle(context)?.copyWith(
-                  color: Colors.white, fontWeight: AppDimens.lfontweight),
-            )
-          : const Icon(
-              Icons.person,
-              color: Colors.white,
-            ),
-    ),
-  );
 }

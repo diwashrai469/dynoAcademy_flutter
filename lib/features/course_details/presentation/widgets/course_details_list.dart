@@ -9,7 +9,6 @@ import 'package:dynoacademy/core/injection/injection.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../bloc/course_details_bloc.dart';
 
 Widget courseDetailsList(
@@ -109,15 +108,19 @@ Widget courseDetailsList(
           ),
           lHeightSpan,
           KButton(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Icon(Icons.shopping_cart_outlined),
-                  sWidthSpan,
-                  const Text("Add To Cart"),
-                ],
-              ),
-              onPressed: () {}),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(Icons.shopping_cart_outlined),
+                sWidthSpan,
+                const Text("Add To Cart"),
+              ],
+            ),
+            onPressed: () {
+              locator<CourseDetailsBloc>()
+                  .add(AddToCart(courseId: courseDataDetails?.id ?? ''));
+            },
+          ),
           elHeightSpan,
           Text(
             "About Course",

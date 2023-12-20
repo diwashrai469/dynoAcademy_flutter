@@ -40,19 +40,10 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
   }
 
   void goForward() {
-    final String? acessToken = localStorage.read(LocalStorageKeys.accessToken);
-
-    if (acessToken == null) {
-      navigationService.pushAndPopUntil(
-        const LoginView(),
-        predicate: (route) => false,
-      );
-    } else {
-      navigationService.pushAndPopUntil(
-        const DashboardView(),
-        predicate: (route) => false,
-      );
-    }
+    navigationService.pushAndPopUntil(
+      const DashboardView(),
+      predicate: (route) => false,
+    );
   }
 
   @override

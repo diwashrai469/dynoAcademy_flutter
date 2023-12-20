@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:dynoacademy/features/courses/data/model/course_response_model/course_response_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -11,8 +10,8 @@ class CoursesServices {
   CoursesServices(this._httpService);
 
   Future<CourseResponseModel> getProducts() async {
-    var response = await Dio().get(
-        "https://dynoacademy.com/_next/data/9NUMGI0YF3QB6vluXUC9a/all-courses.json");
+    var response = await _httpService.http2
+        .get("/_next/data/9NUMGI0YF3QB6vluXUC9a/all-courses.json");
 
     return CourseResponseModel.fromJson(response.data);
   }

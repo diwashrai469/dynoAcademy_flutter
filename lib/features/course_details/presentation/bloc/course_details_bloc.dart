@@ -4,6 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:dynoacademy/core/services/toast_services.dart';
 
 
+import 'package:dynoacademy/features/course_details/data/model/add_to_cart_response_model/add_to_cart_response_model.dart';
+
+
 import 'package:dynoacademy/features/course_details/data/model/course_videos_preview_response_model/course_videos_preview_response_model.dart';
 
 
@@ -49,6 +52,9 @@ class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
 
 
     on<ChangeVideoUrl>(_handlechangeVideoUrl);
+
+
+    on<AddToCart>(_handleaddToCart);
 
   }
 
@@ -157,6 +163,32 @@ class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
             courseVideosPreviewResponseModel: data,
 
             videoUrl: data.data?.first.lessonVideoUrl ?? ''));
+
+      },
+
+    );
+
+  }
+
+
+  void _handleaddToCart(
+
+      AddToCart event, Emitter<CourseDetailsState> emit) async {
+
+    var result = await _getSingleCoursesUsecase.addToCart(event.courseId);
+
+
+    result.fold(
+
+      (NetworkFailure error) {
+
+        _toastService.e(error.message.toString());
+
+      },
+
+      (AddtoCartResponseModel data) {
+
+        _toastService.s(data.message.toString());
 
       },
 

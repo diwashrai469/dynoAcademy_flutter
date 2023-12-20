@@ -4,10 +4,6 @@ import 'package:injectable/injectable.dart';
 class LocalStorageKeys {
   static const accessToken = "AccessToken";
   static const refreshToken = "RefreshToken";
-  static const postId = "postId";
-  static const isClockInStarted = "isClockInStarted";
-  static const trackingApproved = "trackingApproved";
-  static const isAdminView = "isAdminView";
 }
 
 @injectable
