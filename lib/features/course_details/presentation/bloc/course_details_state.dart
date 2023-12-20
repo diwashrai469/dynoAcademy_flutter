@@ -76,3 +76,9 @@ class CourseVideoPreviewLoaded extends CourseDetailsState {
 
 }
 
+
+class IsCourseAddToCartLoading extends CourseDetailsState {}
+
+
+class IsCourseAddToCartLoaded extends CourseDetailsState {}
+

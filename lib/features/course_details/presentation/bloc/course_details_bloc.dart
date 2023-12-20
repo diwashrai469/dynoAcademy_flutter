@@ -175,6 +175,9 @@ class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
 
       AddToCart event, Emitter<CourseDetailsState> emit) async {
 
+    emit(IsCourseAddToCartLoading());
+
+
     var result = await _getSingleCoursesUsecase.addToCart(event.courseId);
 
 

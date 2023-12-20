@@ -49,9 +49,13 @@ class ChangeVideoUrl extends CourseDetailsEvent {
 
 
 class AddToCart extends CourseDetailsEvent {
+
   final String courseId;
 
+
   const AddToCart({required this.courseId});
+
+
   @override
 
   List<Object> get props => [courseId];

@@ -28,7 +28,7 @@ class CourseDetailsServices {
 
   Future<AddtoCartResponseModel> addTocart(String courseId) async {
     var response = await _httpService.http
-        .post("/courses/addToCart", data: {"course_id": courseId});
+        .post("/v1/courses/addToCart", data: {"course_id": courseId});
 
     return AddtoCartResponseModel.fromJson(response.data);
   }
