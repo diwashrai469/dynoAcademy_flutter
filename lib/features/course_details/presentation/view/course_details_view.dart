@@ -49,8 +49,6 @@ class CourseDetails extends StatelessWidget {
       child: Builder(builder: (context) {
         return BlocBuilder<CourseDetailsBloc, CourseDetailsState>(
           builder: (_, state) {
-            print("hello");
-            print(state);
             if (state is CourseDetailsLoading) {
               return Center(child: kLoadingIndicator(context: context));
             }
@@ -152,16 +150,19 @@ class CourseDetails extends StatelessWidget {
                       ),
                       lHeightSpan,
                       KButton(
-                        child: state is AddingToCartInProgress
-                            ? const CircularProgressIndicator()
-                            : const Text("Add To Cart"),
+                        isBusy: state.isAddingToCart,
+                        child: Row(
+                          children: [
+                            const Icon(Icons.shopping_cart_outlined),
+                            xsWidthSpan,
+                            const Text("Add To Cart"),
+                          ],
+                        ),
                         onPressed: () {
-                          if (state is! AddingToCartInProgress) {
-                            context.read<CourseDetailsBloc>().add(
-                                  AddToCart(
-                                      courseId: courseDataDetails?.id ?? ''),
-                                );
-                          }
+                          context.read<CourseDetailsBloc>().add(
+                                AddToCart(
+                                    courseId: courseDataDetails?.id ?? ''),
+                              );
                         },
                       ),
                       elHeightSpan,
