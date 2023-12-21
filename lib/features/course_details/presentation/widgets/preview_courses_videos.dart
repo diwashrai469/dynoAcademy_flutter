@@ -3,6 +3,7 @@ import 'package:dynoacademy/common/constant/app_dimens.dart';
 import 'package:dynoacademy/common/constant/ui_helpers.dart';
 import 'package:dynoacademy/common/utils/app_text_style.dart';
 import 'package:dynoacademy/common/widgets/k_video_player.dart';
+import 'package:dynoacademy/features/course_details/data/model/course_videos_preview_response_model/course_videos_preview_response_model.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,7 +38,11 @@ class PreviewCourseVideos extends StatelessWidget {
               return Center(child: kLoadingIndicator(context: context));
             } else if (state is CourseVideoPreviewLoaded) {
               return buildContent(
-                  state: state, courseTitle: courseTitle, context: context);
+                  videoUri: state.videoUri ?? '',
+                  courseVideosPreviewResponseModel:
+                      state.courseVideosPreviewResponseModel,
+                  courseTitle: courseTitle,
+                  context: context);
             } else if (state is CourseDetailsEmpty) {
               return Center(child: kEmptyDataWidget("No courses available"));
             } else {
@@ -51,7 +56,8 @@ class PreviewCourseVideos extends StatelessWidget {
 }
 
 Widget buildContent(
-    {required CourseDetailsState state,
+    {required String videoUri,
+    required CourseVideosPreviewResponseModel? courseVideosPreviewResponseModel,
     required String courseTitle,
     required BuildContext context}) {
   return Padding(
@@ -73,7 +79,7 @@ Widget buildContent(
             height: 200,
             child: KvideoPlayer(
               videoPlayerController: VideoPlayerController.networkUrl(
-                Uri.parse(state.videoUri ?? ''),
+                Uri.parse(videoUri),
               ),
               looping: false,
             ),
@@ -85,14 +91,13 @@ Widget buildContent(
         Expanded(
           child: ListView.builder(
             shrinkWrap: true,
-            itemCount:
-                state.courseVideosPreviewResponseModel?.data?.length ?? 0,
+            itemCount: courseVideosPreviewResponseModel?.data?.length ?? 0,
             itemBuilder: (context, index) {
               final previewVideoIndex =
-                  state.courseVideosPreviewResponseModel?.data?[index];
+                  courseVideosPreviewResponseModel?.data?[index];
 
               return Card(
-                color: previewVideoIndex?.lessonVideoUrl == state.videoUri
+                color: previewVideoIndex?.lessonVideoUrl == videoUri
                     ? Colors.blue.shade200
                     : null,
                 child: ListTile(

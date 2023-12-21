@@ -49,6 +49,8 @@ class CourseDetails extends StatelessWidget {
       child: Builder(builder: (context) {
         return BlocBuilder<CourseDetailsBloc, CourseDetailsState>(
           builder: (_, state) {
+            print("hello");
+            print(state);
             if (state is CourseDetailsLoading) {
               return Center(child: kLoadingIndicator(context: context));
             }
@@ -150,18 +152,16 @@ class CourseDetails extends StatelessWidget {
                       ),
                       lHeightSpan,
                       KButton(
-                        isBusy: state is IsCourseAddToCartLoading,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.shopping_cart_outlined),
-                            sWidthSpan,
-                            const Text("Add To Cart"),
-                          ],
-                        ),
+                        child: state is AddingToCartInProgress
+                            ? const CircularProgressIndicator()
+                            : const Text("Add To Cart"),
                         onPressed: () {
-                          context.read<CourseDetailsBloc>().add(
-                              AddToCart(courseId: courseDataDetails?.id ?? ''));
+                          if (state is! AddingToCartInProgress) {
+                            context.read<CourseDetailsBloc>().add(
+                                  AddToCart(
+                                      courseId: courseDataDetails?.id ?? ''),
+                                );
+                          }
                         },
                       ),
                       elHeightSpan,
@@ -184,7 +184,7 @@ class CourseDetails extends StatelessWidget {
             } else if (state is CourseDetailsEmpty) {
               return Center(child: kEmptyDataWidget("No any courses"));
             }
-            return const Text("Something went wrong");
+            return Center(child: Text("Unexpected state: $state"));
           },
         );
       }),
