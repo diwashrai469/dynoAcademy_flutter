@@ -29,18 +29,18 @@ class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
 
   CourseDetailsBloc(this._getSingleCoursesUsecase, this._toastService)
       : super(CourseDetailsEmptyState()) {
-    on<GetSingleCourseDetails>(_handleGetSingleCourseDetails);
+    on<GetSingleCourseDetailsEvent>(_handleGetSingleCourseDetails);
 
-    on<GetVideosPreview>(_handleGetVideoPreview);
+    on<GetVideosPreviewEvent>(_handleGetVideoPreview);
 
-    on<ChangeVideoUrl>(_handlechangeVideoUrl);
+    on<ChangeVideoUrlEvent>(_handlechangeVideoUrl);
 
-    on<AddToCart>(_handleaddToCart);
-    on<CheckCourseStatus>(_handleCheckCourseStatus);
+    on<AddToCartEvent>(_handleaddToCart);
+    on<CheckCourseStatusEvent>(_handleCheckCourseStatus);
   }
 
   void _handlechangeVideoUrl(
-      ChangeVideoUrl event, Emitter<CourseDetailsState> emit) async {
+      ChangeVideoUrlEvent event, Emitter<CourseDetailsState> emit) async {
     // Retrieve the current state
 
     CourseDetailsState currentState = state;
@@ -66,8 +66,8 @@ class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
     }
   }
 
-  void _handleGetSingleCourseDetails(
-      GetSingleCourseDetails event, Emitter<CourseDetailsState> emit) async {
+  void _handleGetSingleCourseDetails(GetSingleCourseDetailsEvent event,
+      Emitter<CourseDetailsState> emit) async {
     emit(CourseDetailsLoadingState());
 
     var result = await _getSingleCoursesUsecase.call(event.slug);
@@ -89,7 +89,7 @@ class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
   }
 
   void _handleGetVideoPreview(
-      GetVideosPreview event, Emitter<CourseDetailsState> emit) async {
+      GetVideosPreviewEvent event, Emitter<CourseDetailsState> emit) async {
     emit(CourseDetailsLoadingState());
 
     var result = await _getSingleCoursesUsecase.getVideoPreview(event.courseId);
@@ -107,7 +107,7 @@ class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
   }
 
   void _handleaddToCart(
-      AddToCart event, Emitter<CourseDetailsState> emit) async {
+      AddToCartEvent event, Emitter<CourseDetailsState> emit) async {
     emit(CourseDetailsLoadedState(
       courseDetailsResponseModel: state.courseDetailsResponseModel,
       isAddingToCart: true,
@@ -133,7 +133,7 @@ class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
   }
 
   void _handleCheckCourseStatus(
-      CheckCourseStatus event, Emitter<CourseDetailsState> emit) async {
+      CheckCourseStatusEvent event, Emitter<CourseDetailsState> emit) async {
     emit(CourseDetailsLoadingState());
 
     var result = await _getSingleCoursesUsecase.getCourseStatus(event.courseId);

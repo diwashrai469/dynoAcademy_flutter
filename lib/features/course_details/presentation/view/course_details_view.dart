@@ -33,15 +33,17 @@ class CourseDetails extends StatelessWidget {
   }
 
   BlocProvider<CourseDetailsBloc> builderBody() {
+    var bloc = locator<CourseDetailsBloc>();
+
     return BlocProvider<CourseDetailsBloc>(
       create: (_) {
-        var bloc = locator<CourseDetailsBloc>();
-        bloc.add(GetSingleCourseDetails(slug: slug));
+        bloc.add(GetSingleCourseDetailsEvent(slug: slug));
 
         return bloc;
       },
       child: Builder(builder: (context) {
         return BlocBuilder<CourseDetailsBloc, CourseDetailsState>(
+          bloc: bloc,
           builder: (_, state) {
             if (state is CourseDetailsLoadingState) {
               return Center(child: kLoadingIndicator(context: context));
@@ -158,7 +160,7 @@ class CourseDetails extends StatelessWidget {
                         ),
                         onPressed: () {
                           context.read<CourseDetailsBloc>().add(
-                                AddToCart(
+                                AddToCartEvent(
                                     courseId: courseDataDetails?.id ?? ''),
                               );
                         },

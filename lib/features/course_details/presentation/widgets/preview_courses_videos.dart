@@ -28,7 +28,7 @@ class PreviewCourseVideos extends StatelessWidget {
       body: BlocProvider<CourseDetailsBloc>(
         create: (_) {
           var bloc = locator<CourseDetailsBloc>();
-          bloc.add(GetVideosPreview(courseId: courseId));
+          bloc.add(GetVideosPreviewEvent(courseId: courseId));
 
           return bloc;
         },
@@ -103,8 +103,9 @@ Widget buildContent(
                 child: ListTile(
                   onTap: () {
                     BlocProvider.of<CourseDetailsBloc>(context).add(
-                        ChangeVideoUrl(
-                            videoUrl: previewVideoIndex?.lessonVideoUrl ?? ''));
+                      ChangeVideoUrlEvent(
+                          videoUrl: previewVideoIndex?.lessonVideoUrl ?? ''),
+                    );
                   },
                   leading: const CircleAvatar(
                     backgroundColor: primaryColor,

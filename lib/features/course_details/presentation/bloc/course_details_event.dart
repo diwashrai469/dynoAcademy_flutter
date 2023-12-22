@@ -7,38 +7,38 @@ sealed class CourseDetailsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetSingleCourseDetails extends CourseDetailsEvent {
+class GetSingleCourseDetailsEvent extends CourseDetailsEvent {
   final String slug;
 
-  const GetSingleCourseDetails({required this.slug});
+  const GetSingleCourseDetailsEvent({required this.slug});
 }
 
-class GetVideosPreview extends CourseDetailsEvent {
+class GetVideosPreviewEvent extends CourseDetailsEvent {
   final String courseId;
 
-  const GetVideosPreview({required this.courseId});
+  const GetVideosPreviewEvent({required this.courseId});
 }
 
-class ChangeVideoUrl extends CourseDetailsEvent {
+class ChangeVideoUrlEvent extends CourseDetailsEvent {
   final String videoUrl;
 
-  const ChangeVideoUrl({required this.videoUrl});
+  const ChangeVideoUrlEvent({required this.videoUrl});
 
   @override
   List<Object> get props => [videoUrl];
 }
 
-class AddToCart extends CourseDetailsEvent {
+class AddToCartEvent extends CourseDetailsEvent {
   final String courseId;
 
-  const AddToCart({required this.courseId});
+  const AddToCartEvent({required this.courseId});
 
   @override
   List<Object> get props => [courseId];
 }
 
-class CheckCourseStatus extends CourseDetailsEvent {
+class CheckCourseStatusEvent extends CourseDetailsEvent {
   final String courseId;
 
-  const CheckCourseStatus({required this.courseId});
+  const CheckCourseStatusEvent({required this.courseId});
 }
