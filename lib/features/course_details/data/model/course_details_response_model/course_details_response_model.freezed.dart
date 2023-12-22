@@ -385,7 +385,7 @@ mixin _$CourseData {
   String? get courseInfo => throw _privateConstructorUsedError;
   @JsonKey(name: "course_description")
   String? get courseDescription => throw _privateConstructorUsedError;
-  @JsonKey(name: "course_enrolled")
+  @JsonKey(name: "students_enrolled")
   num? get studentsEnrolled => throw _privateConstructorUsedError;
   num? get rating => throw _privateConstructorUsedError;
   num? get raters => throw _privateConstructorUsedError;
@@ -430,7 +430,7 @@ abstract class $CourseDataCopyWith<$Res> {
       @JsonKey(name: "course_duration") num? courseDuration,
       @JsonKey(name: "course_info") String? courseInfo,
       @JsonKey(name: "course_description") String? courseDescription,
-      @JsonKey(name: "course_enrolled") num? studentsEnrolled,
+      @JsonKey(name: "students_enrolled") num? studentsEnrolled,
       num? rating,
       num? raters,
       num? cost,
@@ -624,7 +624,7 @@ abstract class _$$CourseDataImplCopyWith<$Res>
       @JsonKey(name: "course_duration") num? courseDuration,
       @JsonKey(name: "course_info") String? courseInfo,
       @JsonKey(name: "course_description") String? courseDescription,
-      @JsonKey(name: "course_enrolled") num? studentsEnrolled,
+      @JsonKey(name: "students_enrolled") num? studentsEnrolled,
       num? rating,
       num? raters,
       num? cost,
@@ -800,7 +800,7 @@ class _$CourseDataImpl implements _CourseData {
       @JsonKey(name: "course_duration") this.courseDuration,
       @JsonKey(name: "course_info") this.courseInfo,
       @JsonKey(name: "course_description") this.courseDescription,
-      @JsonKey(name: "course_enrolled") this.studentsEnrolled,
+      @JsonKey(name: "students_enrolled") this.studentsEnrolled,
       this.rating,
       this.raters,
       this.cost,
@@ -842,7 +842,7 @@ class _$CourseDataImpl implements _CourseData {
   @JsonKey(name: "course_description")
   final String? courseDescription;
   @override
-  @JsonKey(name: "course_enrolled")
+  @JsonKey(name: "students_enrolled")
   final num? studentsEnrolled;
   @override
   final num? rating;
@@ -993,7 +993,7 @@ abstract class _CourseData implements CourseData {
       @JsonKey(name: "course_duration") final num? courseDuration,
       @JsonKey(name: "course_info") final String? courseInfo,
       @JsonKey(name: "course_description") final String? courseDescription,
-      @JsonKey(name: "course_enrolled") final num? studentsEnrolled,
+      @JsonKey(name: "students_enrolled") final num? studentsEnrolled,
       final num? rating,
       final num? raters,
       final num? cost,
@@ -1036,7 +1036,7 @@ abstract class _CourseData implements CourseData {
   @JsonKey(name: "course_description")
   String? get courseDescription;
   @override
-  @JsonKey(name: "course_enrolled")
+  @JsonKey(name: "students_enrolled")
   num? get studentsEnrolled;
   @override
   num? get rating;

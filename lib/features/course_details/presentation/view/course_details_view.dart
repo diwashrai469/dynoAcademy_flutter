@@ -19,22 +19,16 @@ import '../bloc/course_details_bloc.dart';
 @RoutePage()
 class CourseDetails extends StatelessWidget {
   final String slug;
-  const CourseDetails({super.key, required this.slug});
+  final String courseid;
+  const CourseDetails({super.key, required this.slug, required this.courseid});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CourseDetailsBloc>(
-      create: (_) {
-        var bloc = locator<CourseDetailsBloc>();
-        bloc.add(GetSingleCourseDetails(slug: slug));
-        return bloc;
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Course Details"),
-        ),
-        body: builderBody(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Course Details"),
       ),
+      body: builderBody(),
     );
   }
 
@@ -49,12 +43,15 @@ class CourseDetails extends StatelessWidget {
       child: Builder(builder: (context) {
         return BlocBuilder<CourseDetailsBloc, CourseDetailsState>(
           builder: (_, state) {
-            if (state is CourseDetailsLoading) {
+            if (state is CourseDetailsLoadingState) {
               return Center(child: kLoadingIndicator(context: context));
             }
-            if (state is CourseDetailsLoaded) {
+            if (state is CourseDetailsLoadedState) {
               final courseDataDetails =
                   state.courseDetailsResponseModel?.pageProps?.courseData;
+              final courseStatusDetails =
+                  state.courseStatusResponseModel?.data?.courseStatus;
+              print("status:$courseStatusDetails");
 
               return SingleChildScrollView(
                 child: Padding(
@@ -63,6 +60,7 @@ class CourseDetails extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       mHeightSpan,
+                      Text(courseStatusDetails ?? '--'),
                       Text(
                         courseDataDetails?.courseName ?? '',
                         textAlign: TextAlign.center,
@@ -182,7 +180,7 @@ class CourseDetails extends StatelessWidget {
                   ),
                 ),
               );
-            } else if (state is CourseDetailsEmpty) {
+            } else if (state is CourseDetailsEmptyState) {
               return Center(child: kEmptyDataWidget("No any courses"));
             }
             return Center(child: Text("Unexpected state: $state"));

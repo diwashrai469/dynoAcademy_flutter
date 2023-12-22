@@ -35,6 +35,7 @@ abstract class $AppRouters extends _i7.RootStackRouter {
         child: _i1.CourseDetails(
           key: args.key,
           slug: args.slug,
+          courseid: args.courseid,
         ),
       );
     },
@@ -82,12 +83,14 @@ class CourseDetails extends _i7.PageRouteInfo<CourseDetailsArgs> {
   CourseDetails({
     _i8.Key? key,
     required String slug,
+    required String courseid,
     List<_i7.PageRouteInfo>? children,
   }) : super(
           CourseDetails.name,
           args: CourseDetailsArgs(
             key: key,
             slug: slug,
+            courseid: courseid,
           ),
           initialChildren: children,
         );
@@ -102,15 +105,18 @@ class CourseDetailsArgs {
   const CourseDetailsArgs({
     this.key,
     required this.slug,
+    required this.courseid,
   });
 
   final _i8.Key? key;
 
   final String slug;
 
+  final String courseid;
+
   @override
   String toString() {
-    return 'CourseDetailsArgs{key: $key, slug: $slug}';
+    return 'CourseDetailsArgs{key: $key, slug: $slug, courseid: $courseid}';
   }
 }
 

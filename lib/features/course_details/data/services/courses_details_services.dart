@@ -1,5 +1,6 @@
 import 'package:dynoacademy/features/course_details/data/model/add_to_cart_response_model/add_to_cart_response_model.dart';
 import 'package:dynoacademy/features/course_details/data/model/course_details_response_model/course_details_response_model.dart';
+import 'package:dynoacademy/features/course_details/data/model/course_status_response_model/course_status_response_model.dart';
 import 'package:dynoacademy/features/course_details/data/model/course_videos_preview_response_model/course_videos_preview_response_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -31,5 +32,13 @@ class CourseDetailsServices {
         .post("/v1/courses/addToCart", data: {"course_id": courseId});
 
     return AddtoCartResponseModel.fromJson(response.data);
+  }
+
+  Future<CourseStatusResponseModel> checkCourseStatus(String courseId) async {
+    print("courseid:$courseId");
+    var response =
+        await _httpService.http.get("/v1/courses/checkCourseStatus/$courseId");
+
+    return CourseStatusResponseModel.fromJson(response.data);
   }
 }

@@ -34,16 +34,16 @@ class PreviewCourseVideos extends StatelessWidget {
         },
         child: BlocBuilder<CourseDetailsBloc, CourseDetailsState>(
           builder: (_, state) {
-            if (state is CourseDetailsLoading) {
+            if (state is CourseDetailsLoadingState) {
               return Center(child: kLoadingIndicator(context: context));
-            } else if (state is CourseVideoPreviewLoaded) {
+            } else if (state is CourseVideoPreviewLoadedState) {
               return buildContent(
                   videoUri: state.videoUri ?? '',
                   courseVideosPreviewResponseModel:
                       state.courseVideosPreviewResponseModel,
                   courseTitle: courseTitle,
                   context: context);
-            } else if (state is CourseDetailsEmpty) {
+            } else if (state is CourseDetailsEmptyState) {
               return Center(child: kEmptyDataWidget("No courses available"));
             } else {
               return Container();
