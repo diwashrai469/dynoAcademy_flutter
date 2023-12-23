@@ -9,6 +9,7 @@ import 'package:dynoacademy/core/app_routers/app_routers.dart';
 import 'package:dynoacademy/core/app_routers/app_routers.gr.dart';
 import 'package:dynoacademy/core/injection/injection.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,12 +39,12 @@ class CourseDetails extends StatelessWidget {
     return BlocProvider<CourseDetailsBloc>(
       create: (_) {
         bloc.add(GetSingleCourseDetailsEvent(slug: slug));
+        bloc.add(CheckCourseStatusEvent(courseId: courseid));
 
         return bloc;
       },
       child: Builder(builder: (context) {
         return BlocBuilder<CourseDetailsBloc, CourseDetailsState>(
-          bloc: bloc,
           builder: (_, state) {
             if (state is CourseDetailsLoadingState) {
               return Center(child: kLoadingIndicator(context: context));
@@ -51,137 +52,164 @@ class CourseDetails extends StatelessWidget {
             if (state is CourseDetailsLoadedState) {
               final courseDataDetails =
                   state.courseDetailsResponseModel?.pageProps?.courseData;
-              final courseStatusDetails =
-                  state.courseStatusResponseModel?.data?.courseStatus;
-              print("status:$courseStatusDetails");
+              final courseStatus = state.courseStatus?.data;
 
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: AppDimens.mainPagePadding,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      mHeightSpan,
-                      Text(courseStatusDetails ?? '--'),
-                      Text(
-                        courseDataDetails?.courseName ?? '',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: primaryColor,
-                              fontSize: AppDimens.headlineFontSizeSSmall,
-                              fontWeight: AppDimens.lfontweight,
-                            ),
-                      ),
-                      lHeightSpan,
-                      GestureDetector(
-                        onTap: () => locator<AppRouters>().push(
-                          PreviewCourseVideos(
-                              courseId: courseDataDetails?.id ?? '',
-                              courseTitle: courseDataDetails?.courseName ?? ''),
-                        ),
-                        child: Stack(
-                          alignment: Alignment.center,
+              print("before:${courseStatus?.courseStatus}");
+
+              return courseDataDetails == null
+                  ? Center(child: kLoadingIndicator(context: context))
+                  : SingleChildScrollView(
+                      child: Padding(
+                        padding: AppDimens.mainPagePadding,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Hero(
-                              tag: courseDataDetails?.id ?? '',
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                    courseDataDetails?.thumbnail ?? ''),
+                            mHeightSpan,
+                            Text(
+                              courseDataDetails.courseName ?? '',
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    color: primaryColor,
+                                    fontSize: AppDimens.headlineFontSizeSSmall,
+                                    fontWeight: AppDimens.lfontweight,
+                                  ),
+                            ),
+                            lHeightSpan,
+                            GestureDetector(
+                              onTap: () => locator<AppRouters>().push(
+                                PreviewCourseVideos(
+                                    courseId: courseDataDetails.id ?? '',
+                                    courseTitle:
+                                        courseDataDetails.courseName ?? ''),
+                              ),
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Hero(
+                                    tag: courseDataDetails.id ?? '',
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.network(
+                                          courseDataDetails.thumbnail ?? ''),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: 75.h,
+                                    child: const CircleAvatar(
+                                      backgroundColor: disabledColor,
+                                      child: Icon(Icons.play_arrow),
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
-                            Positioned(
-                              top: 75.h,
-                              child: const CircleAvatar(
-                                backgroundColor: disabledColor,
-                                child: Icon(Icons.play_arrow),
+                            mHeightSpan,
+                            KButton(
+                              child: const Text("Preview Course"),
+                              onPressed: () => locator<AppRouters>().push(
+                                PreviewCourseVideos(
+                                    courseId: courseDataDetails.id ?? '',
+                                    courseTitle:
+                                        courseDataDetails.courseName ?? ''),
                               ),
+                            ),
+                            mHeightSpan,
+                            Text(courseDataDetails.courseInfo ?? ''),
+                            mHeightSpan,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    const Icon(
+                                      Icons.leaderboard_sharp,
+                                      color: successColor,
+                                    ),
+                                    sWidthSpan,
+                                    Text(courseDataDetails.skillLevel ?? '--')
+                                  ],
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    const Icon(
+                                      Icons.person,
+                                      color: Colors.blue,
+                                    ),
+                                    sWidthSpan,
+                                    Text(
+                                        "${courseDataDetails.studentsEnrolled ?? "-- "} Enrolls"),
+                                  ],
+                                ),
+                                Text(
+                                  "रु ${courseDataDetails.cost.toString()}",
+                                  style: appTextStyle(context)?.copyWith(
+                                      color: primaryColor,
+                                      fontWeight: AppDimens.lfontweight,
+                                      fontSize:
+                                          AppDimens.headlineFontSizeSSmall),
+                                ),
+                              ],
+                            ),
+                            lHeightSpan,
+                            KButton(
+                              isBusy: state.isAddingToCart,
+                              child: courseStatus?.courseStatus == "pending"
+                                  ? Row(
+                                      children: [
+                                        const Icon(
+                                          CupertinoIcons.check_mark_circled,
+                                          color: successColor,
+                                        ),
+                                        xsWidthSpan,
+                                        const Text("Added to Cart"),
+                                      ],
+                                    )
+                                  : Row(
+                                      children: [
+                                        const Icon(
+                                            Icons.shopping_cart_outlined),
+                                        xsWidthSpan,
+                                        const Text("Add To Cart"),
+                                      ],
+                                    ),
+                              onPressed: () {
+                                if (courseStatus == null) {
+                                  BlocProvider.of<CourseDetailsBloc>(context)
+                                      .add(AddToCartEvent(
+                                          courseId:
+                                              courseDataDetails.id ?? ''));
+                                  BlocProvider.of<CourseDetailsBloc>(context)
+                                      .add(CheckCourseStatusEvent(
+                                          courseId: courseid));
+                                }
+                              },
+                            ),
+                            elHeightSpan,
+                            Text(
+                              "About Course",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    color: primaryColor,
+                                    fontSize: AppDimens.headlineFontSizeSmall,
+                                    fontWeight: AppDimens.lfontweight,
+                                  ),
+                            ),
+                            Text(
+                              removeHtmlTags(
+                                  courseDataDetails.courseDescription ?? ''),
                             )
                           ],
                         ),
                       ),
-                      mHeightSpan,
-                      KButton(
-                        child: const Text("Preview Course"),
-                        onPressed: () => locator<AppRouters>().push(
-                          PreviewCourseVideos(
-                              courseId: courseDataDetails?.id ?? '',
-                              courseTitle: courseDataDetails?.courseName ?? ''),
-                        ),
-                      ),
-                      mHeightSpan,
-                      Text(courseDataDetails?.courseInfo ?? ''),
-                      mHeightSpan,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              const Icon(
-                                Icons.leaderboard_sharp,
-                                color: successColor,
-                              ),
-                              sWidthSpan,
-                              Text(courseDataDetails?.skillLevel ?? '--')
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              const Icon(
-                                Icons.person,
-                                color: Colors.blue,
-                              ),
-                              sWidthSpan,
-                              Text(
-                                  "${courseDataDetails?.studentsEnrolled ?? "-- "} Enrolls"),
-                            ],
-                          ),
-                          Text(
-                            "रु ${courseDataDetails?.cost.toString()}",
-                            style: appTextStyle(context)?.copyWith(
-                                color: primaryColor,
-                                fontWeight: AppDimens.lfontweight,
-                                fontSize: AppDimens.headlineFontSizeSSmall),
-                          ),
-                        ],
-                      ),
-                      lHeightSpan,
-                      KButton(
-                        isBusy: state.isAddingToCart,
-                        child: Row(
-                          children: [
-                            const Icon(Icons.shopping_cart_outlined),
-                            xsWidthSpan,
-                            const Text("Add To Cart"),
-                          ],
-                        ),
-                        onPressed: () {
-                          context.read<CourseDetailsBloc>().add(
-                                AddToCartEvent(
-                                    courseId: courseDataDetails?.id ?? ''),
-                              );
-                        },
-                      ),
-                      elHeightSpan,
-                      Text(
-                        "About Course",
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: primaryColor,
-                              fontSize: AppDimens.headlineFontSizeSmall,
-                              fontWeight: AppDimens.lfontweight,
-                            ),
-                      ),
-                      Text(
-                        removeHtmlTags(
-                            courseDataDetails?.courseDescription ?? ''),
-                      )
-                    ],
-                  ),
-                ),
-              );
+                    );
             } else if (state is CourseDetailsEmptyState) {
               return Center(child: kEmptyDataWidget("No any courses"));
             }
