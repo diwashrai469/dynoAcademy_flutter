@@ -1,278 +1,137 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-
-
 import 'package:dynoacademy/core/services/toast_services.dart';
-
-
+import 'package:dynoacademy/features/course_details/data/model/add_to_cart_response_model/add_to_cart_response_model.dart';
 import 'package:dynoacademy/features/course_details/data/model/course_status_response_model/course_status_response_model.dart';
-
-
 import 'package:dynoacademy/features/course_details/data/model/course_videos_preview_response_model/course_videos_preview_response_model.dart';
-
-
 import 'package:dynoacademy/features/course_details/domain/usecases/get_single_courses_usecase.dart';
-
-
 import 'package:equatable/equatable.dart';
-
-
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
-
 import '../../../../core/services/network_services.dart';
-
-
-import '../../data/model/add_to_cart_response_model/add_to_cart_response_model.dart';
-
-
 import '../../data/model/course_details_response_model/course_details_response_model.dart';
 
-
 part 'course_details_event.dart';
-
-
 part 'course_details_state.dart';
 
-
 @injectable
-
 class CourseDetailsBloc extends Bloc<CourseDetailsEvent, CourseDetailsState> {
-
   final GetSingleCoursesUsecase _getSingleCoursesUsecase;
-
 
   final ToastService _toastService;
 
-
   CourseDetailsBloc(this._getSingleCoursesUsecase, this._toastService)
-
-      : super(CourseDetailsEmptyState()) {
-
+      : super(CourseDetailsInitialState()) {
     on<GetSingleCourseDetailsEvent>(_handleGetSingleCourseDetails);
-
 
     on<GetVideosPreviewEvent>(_handleGetVideoPreview);
 
-
     on<ChangeVideoUrlEvent>(_handlechangeVideoUrl);
 
-
     on<AddToCartEvent>(_handleaddToCart);
-
-
-    on<CheckCourseStatusEvent>(_handleCheckCourseStatus);
-
   }
 
-
-  void _handlechangeVideoUrl(
-
-      ChangeVideoUrlEvent event, Emitter<CourseDetailsState> emit) async {
-
-    // Retrieve the current state
-
-
-    CourseDetailsState currentState = state;
-
-
-    // Check if the current state is an instance of CourseVideoPreviewLoaded
-
-
-    if (currentState is CourseVideoPreviewLoadedState) {
-
-      // Create a new instance of CourseVideoPreviewLoaded with the updated video URL
-
-
-      CourseDetailsState newState = CourseVideoPreviewLoadedState(
-
-        videoUrl: event.videoUrl,
-
-        courseVideosPreviewResponseModel:
-
-            currentState.courseVideosPreviewResponseModel,
-
-      );
-
-
-      // Emit the new state
-
-
-      emit(newState);
-
-    } else {
-
-      // If the current state is not CourseVideoPreviewLoaded, emit the SelectedVideoUrl state
-
-
-      emit(SelectedVideoUrlState(selectedVideoUrl: event.videoUrl));
-
-    }
-
-  }
-
-
-  void _handleGetSingleCourseDetails(GetSingleCourseDetailsEvent event,
-
+  FutureOr<void> _handleGetSingleCourseDetails(
+      GetSingleCourseDetailsEvent event,
       Emitter<CourseDetailsState> emit) async {
-
     emit(CourseDetailsLoadingState());
-
-
-    var result = await _getSingleCoursesUsecase.call(event.slug);
-
-
-    result.fold(
-
-      (NetworkFailure error) {
-
-        _toastService.e(error.message.toString());
-
-      },
-
-      (CourseDetailsResponseModel data) {
-
-        emit(
-
-          CourseDetailsLoadedState(
-
-            courseStatus: state.courseStatus,
-
-            courseDetailsResponseModel: data,
-
-          ),
-
-        );
-
-      },
-
-    );
-
+    final CourseDetailsResponseModel courseDetailsResponseModel =
+        await getCourseDetails(event.slug);
+    final CourseStatusResponseModel courseStatus =
+        await getCourseStatus(event.courseId);
+    emit(CourseDetailsLoadedState(
+        courseDetailsResponseModel: courseDetailsResponseModel,
+        courseStatus: courseStatus));
   }
 
-
-  void _handleGetVideoPreview(
-
-      GetVideosPreviewEvent event, Emitter<CourseDetailsState> emit) async {
-
-    emit(CourseDetailsLoadingState());
-
-
-    var result = await _getSingleCoursesUsecase.getVideoPreview(event.courseId);
-
-
-    result.fold(
-
-      (NetworkFailure error) {
-
-        _toastService.e(error.message.toString());
-
-      },
-
-      (CourseVideosPreviewResponseModel data) {
-
-        emit(CourseVideoPreviewLoadedState(
-
-            courseVideosPreviewResponseModel: data,
-
-            videoUrl: data.data?.first.lessonVideoUrl ?? ''));
-
-      },
-
-    );
-
-  }
-
-
-  void _handleaddToCart(
-
+  FutureOr<void> _handleaddToCart(
       AddToCartEvent event, Emitter<CourseDetailsState> emit) async {
+    CourseDetailsLoadedState currentState = state as CourseDetailsLoadedState;
 
     emit(CourseDetailsLoadedState(
-
-      courseDetailsResponseModel: state.courseDetailsResponseModel,
-
       isAddingToCart: true,
-
+      courseDetailsResponseModel: currentState.courseDetailsResponseModel,
+      courseStatus: currentState.courseStatus,
     ));
-
-
-    var result = await _getSingleCoursesUsecase.addToCart(event.courseId);
-
-
-    result.fold(
-
-      (NetworkFailure error) {
-
-        _toastService.e(error.message.toString());
-
-      },
-
-      (AddtoCartResponseModel data) {
-
-        _toastService.s(data.message.toString());
-
-      },
-
-    );
-
-
+    await addToCart(event.courseId);
+    final CourseStatusResponseModel courseStatus =
+        await getCourseStatus(event.courseId);
     emit(
-
       CourseDetailsLoadedState(
-
-        courseDetailsResponseModel: state.courseDetailsResponseModel,
-
-        isAddingToCart: false,
-
-      ),
-
+          isAddingToCart: false,
+          courseDetailsResponseModel: currentState.courseDetailsResponseModel,
+          courseStatus: courseStatus),
     );
-
   }
 
-
-  void _handleCheckCourseStatus(
-
-      CheckCourseStatusEvent event, Emitter<CourseDetailsState> emit) async {
-
+  FutureOr<void> _handleGetVideoPreview(
+      GetVideosPreviewEvent event, Emitter<CourseDetailsState> emit) async {
     emit(CourseDetailsLoadingState());
-
-
-    var result = await _getSingleCoursesUsecase.getCourseStatus(event.courseId);
-
-
-    result.fold(
-
-      (NetworkFailure error) {
-
-        _toastService.e(error.message.toString());
-
-      },
-
-      (CourseStatusResponseModel data) {
-
-        emit(
-
-          CourseDetailsLoadedState(
-
-            courseDetailsResponseModel: state.courseDetailsResponseModel,
-
-            isAddingToCart: false,
-
-            courseStatus: data,
-
-          ),
-
-        );
-
-
-        print(data.data?.courseStatus);
-
-      },
-
-    );
-
+    final CourseVideosPreviewResponseModel courseVideosPreviewResponseModel =
+        await getCoursePreviewVideos(event.courseId);
+    emit(CourseVideoPreviewLoadedState(
+        courseVideosPreviewResponseModel: courseVideosPreviewResponseModel,
+        videoUri: courseVideosPreviewResponseModel.data?.first.lessonVideoUrl));
   }
 
-}
+  FutureOr<void> _handlechangeVideoUrl(
+      ChangeVideoUrlEvent event, Emitter<CourseDetailsState> emit) {
+    CourseVideoPreviewLoadedState currentState =
+        state as CourseVideoPreviewLoadedState;
 
+    emit(CourseVideoPreviewLoadedState(
+        courseVideosPreviewResponseModel:
+            currentState.courseVideosPreviewResponseModel,
+        videoUri: event.videoUrl));
+  }
+
+  //all the call method are define below whcih are linked to repository
+  //below call method will also handel the error that occures during api call
+
+  Future<CourseDetailsResponseModel> getCourseDetails(String slug) async {
+    var result = await _getSingleCoursesUsecase.call(slug);
+    return result.fold(
+      (NetworkFailure error) {
+        _toastService.e(error.message.toString());
+        throw error;
+      },
+      (CourseDetailsResponseModel data) => data,
+    );
+  }
+
+  addToCart(String coursId) async {
+    var result = await _getSingleCoursesUsecase.addToCart(coursId);
+    return result.fold(
+      (NetworkFailure error) {
+        _toastService.e(error.message.toString());
+        throw error;
+      },
+      (AddtoCartResponseModel data) => _toastService.s(data.message ?? ""),
+    );
+  }
+
+  Future<CourseStatusResponseModel> getCourseStatus(String courseId) async {
+    var result = await _getSingleCoursesUsecase.getCourseStatus(courseId);
+    return result.fold(
+      (NetworkFailure error) {
+        _toastService.e(error.message.toString());
+        throw error;
+      },
+      (CourseStatusResponseModel data) => data,
+    );
+  }
+
+  Future<CourseVideosPreviewResponseModel> getCoursePreviewVideos(
+      String courseId) async {
+    var result = await _getSingleCoursesUsecase.getVideoPreview(courseId);
+    return result.fold(
+      (NetworkFailure error) {
+        _toastService.e(error.message.toString());
+        throw error;
+      },
+      (CourseVideosPreviewResponseModel data) => data,
+    );
+  }
+}

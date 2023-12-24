@@ -8,7 +8,6 @@ import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:video_player/video_player.dart';
-import '../../../../common/widgets/k_empty_data_widget.dart';
 import '../../../../common/widgets/k_loading_indicator.dart';
 import '../../../../core/injection/injection.dart';
 import '../bloc/course_details_bloc.dart';
@@ -43,10 +42,8 @@ class PreviewCourseVideos extends StatelessWidget {
                       state.courseVideosPreviewResponseModel,
                   courseTitle: courseTitle,
                   context: context);
-            } else if (state is CourseDetailsEmptyState) {
-              return Center(child: kEmptyDataWidget("No courses available"));
             } else {
-              return Container();
+              return const SizedBox.shrink();
             }
           },
         ),

@@ -9,8 +9,10 @@ sealed class CourseDetailsEvent extends Equatable {
 
 class GetSingleCourseDetailsEvent extends CourseDetailsEvent {
   final String slug;
+  final String courseId;
 
-  const GetSingleCourseDetailsEvent({required this.slug});
+  const GetSingleCourseDetailsEvent(
+      {required this.slug, required this.courseId});
 }
 
 class GetVideosPreviewEvent extends CourseDetailsEvent {
@@ -35,10 +37,4 @@ class AddToCartEvent extends CourseDetailsEvent {
 
   @override
   List<Object> get props => [courseId];
-}
-
-class CheckCourseStatusEvent extends CourseDetailsEvent {
-  final String courseId;
-
-  const CheckCourseStatusEvent({required this.courseId});
 }

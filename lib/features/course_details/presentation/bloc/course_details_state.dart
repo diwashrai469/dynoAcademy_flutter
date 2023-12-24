@@ -1,104 +1,35 @@
 part of 'course_details_bloc.dart';
 
+@immutable
+abstract class CourseDetailsState {}
 
-abstract class CourseDetailsState {
-
-  final CourseDetailsResponseModel? courseDetailsResponseModel;
-
-
-  final String? videoUri;
-
-
-  final CourseStatusResponseModel? courseStatus;
-
-
-  final CourseVideosPreviewResponseModel? courseVideosPreviewResponseModel;
-
-
-  const CourseDetailsState({
-
-    this.courseStatus,
-
-    this.courseDetailsResponseModel,
-
-    this.courseVideosPreviewResponseModel,
-
-    this.videoUri,
-
-  });
-
-
-  // @override
-
-
-  // List<Object?> get props => [
-
-
-  //       courseDetailsResponseModel,
-
-
-  //       courseVideosPreviewResponseModel,
-
-
-  //       videoUri,
-
-
-  //       courseStatus
-
-
-  //     ];
-
-}
-
+class CourseDetailsInitialState extends CourseDetailsState {}
 
 class CourseDetailsLoadingState extends CourseDetailsState {}
 
-
-class CourseDetailsEmptyState extends CourseDetailsState {}
-
-
 class CourseDetailsLoadedState extends CourseDetailsState {
+  final bool? isAddingToCart;
+  final CourseStatusResponseModel? courseStatus;
 
-  final bool isAddingToCart;
+  final CourseDetailsResponseModel? courseDetailsResponseModel;
 
-
-  const CourseDetailsLoadedState({
-
-    super.courseStatus,
-
-    this.isAddingToCart = false,
-
-    super.courseDetailsResponseModel,
-
+  CourseDetailsLoadedState({
+    this.isAddingToCart,
+    this.courseDetailsResponseModel,
+    this.courseStatus,
   });
-
 }
-
-
-class SelectedVideoUrlState extends CourseDetailsState {
-
-  const SelectedVideoUrlState({
-
-    required String selectedVideoUrl,
-
-  }) : super(videoUri: selectedVideoUrl);
-
-}
-
 
 class CourseVideoPreviewLoadedState extends CourseDetailsState {
+  final String? videoUri;
+  final CourseVideosPreviewResponseModel? courseVideosPreviewResponseModel;
 
-  const CourseVideoPreviewLoadedState({
-
-    required String videoUrl,
-
-    required super.courseVideosPreviewResponseModel,
-
-  }) : super(
-
-          videoUri: videoUrl,
-
-        );
-
+  CourseVideoPreviewLoadedState(
+      {this.courseVideosPreviewResponseModel, this.videoUri});
 }
 
+class SelectedVideoUrlState extends CourseDetailsState {
+  final String selectedVideoUrl;
+
+  SelectedVideoUrlState({required this.selectedVideoUrl});
+}

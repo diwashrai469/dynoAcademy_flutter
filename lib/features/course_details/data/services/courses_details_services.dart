@@ -35,7 +35,6 @@ class CourseDetailsServices {
   }
 
   Future<CourseStatusResponseModel> checkCourseStatus(String courseId) async {
-    print("courseid:$courseId");
     var response =
         await _httpService.http.get("/v1/courses/checkCourseStatus/$courseId");
 

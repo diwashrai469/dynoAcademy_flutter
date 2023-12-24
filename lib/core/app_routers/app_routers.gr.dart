@@ -21,7 +21,8 @@ import 'package:dynoacademy/features/log_in/presentation/view/login_view.dart'
     as _i4;
 import 'package:dynoacademy/features/splash/presentation/view/splash_view.dart'
     as _i6;
-import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/cupertino.dart' as _i8;
+import 'package:flutter/material.dart' as _i9;
 
 abstract class $AppRouters extends _i7.RootStackRouter {
   $AppRouters({super.navigatorKey});
@@ -166,7 +167,7 @@ class LoginView extends _i7.PageRouteInfo<void> {
 /// [_i5.PreviewCourseVideos]
 class PreviewCourseVideos extends _i7.PageRouteInfo<PreviewCourseVideosArgs> {
   PreviewCourseVideos({
-    _i8.Key? key,
+    _i9.Key? key,
     required String courseId,
     required String courseTitle,
     List<_i7.PageRouteInfo>? children,
@@ -193,7 +194,7 @@ class PreviewCourseVideosArgs {
     required this.courseTitle,
   });
 
-  final _i8.Key? key;
+  final _i9.Key? key;
 
   final String courseId;
 
