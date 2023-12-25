@@ -9,7 +9,7 @@ import 'package:dynoacademy/core/app_routers/app_routers.dart';
 import 'package:dynoacademy/core/app_routers/app_routers.gr.dart';
 import 'package:dynoacademy/core/injection/injection.dart';
 import 'package:dynoacademy/core/services/local_storage.dart';
-import 'package:dynoacademy/features/dashboard/presentation/widget/k_drop_down.dart';
+import 'package:dynoacademy/features/dashboard/presentation/widget/option_dropdown.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +41,7 @@ class DashboardView extends StatelessWidget {
           width: AppImage.xxlogowidth,
         ),
         actions: [
-          kdropDown(
+          optionDropdown(
             context,
             acessToken ?? '',
           ),

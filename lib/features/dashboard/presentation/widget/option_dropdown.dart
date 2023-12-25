@@ -12,7 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Widget kdropDown(
+Widget optionDropdown(
   BuildContext context,
   String acessToken,
 ) {
@@ -25,6 +25,9 @@ Widget kdropDown(
           const LoginView(),
           predicate: (route) => false,
         );
+      }
+      if (option == "My Cart") {
+        locator<AppRouters>().push(const CourseCartView());
       }
     },
     itemBuilder: (BuildContext context) {
