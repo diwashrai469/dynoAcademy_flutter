@@ -139,6 +139,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i31.CourseCartCubit>(() => _i31.CourseCartCubit(
           gh<_i26.CourseCartUsecase>(),
           gh<_i5.ToastService>(),
+          gh<_i27.DashboardCubitCubit>(),
         ));
     gh.factory<_i32.CourseDetailsBloc>(() => _i32.CourseDetailsBloc(
           gh<_i29.GetSingleCoursesUsecase>(),

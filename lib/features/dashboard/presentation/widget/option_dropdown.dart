@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget optionDropdown(
+  String cartCount,
   BuildContext context,
   String acessToken,
 ) {
@@ -83,7 +84,7 @@ Widget optionDropdown(
                   backgroundColor: errorColor,
                   radius: 12,
                   child: Text(
-                    "10",
+                    cartCount,
                     style: appTextStyle(context)?.copyWith(
                         color: Colors.white,
                         fontSize: AppDimens.headlineFontSizeXXXSmall),

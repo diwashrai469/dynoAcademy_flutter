@@ -10,6 +10,7 @@ import 'package:dynoacademy/core/app_routers/app_routers.dart';
 import 'package:dynoacademy/core/app_routers/app_routers.gr.dart';
 import 'package:dynoacademy/core/injection/injection.dart';
 import 'package:dynoacademy/core/services/local_storage.dart';
+import 'package:dynoacademy/features/config/cubit/config_cubit_cubit.dart';
 import 'package:dynoacademy/features/dashboard/cubit/dashboard_cubit_cubit.dart';
 import 'package:dynoacademy/features/dashboard/presentation/widget/option_dropdown.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
@@ -37,8 +38,16 @@ class DashboardView extends StatelessWidget {
       color: cursorColor,
     );
     double iconSize = 35.h;
-    return BlocProvider<DashboardCubitCubit>(
-      create: (_) => locator<DashboardCubitCubit>()..getConfigData(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<DashboardCubitCubit>(
+          create: (_) => locator<DashboardCubitCubit>()..getConfigData(),
+        ),
+        BlocProvider<ConfigCubitCubit>(
+          create: (context) =>
+              locator<ConfigCubitCubit>()..getConfigTimePeriodic(),
+        ),
+      ],
       child: BlocBuilder<DashboardCubitCubit, DashboardCubitState>(
         builder: (context, state) {
           if (state is DataLoadingState) {
@@ -56,9 +65,21 @@ class DashboardView extends StatelessWidget {
                   width: AppImage.xxlogowidth,
                 ),
                 actions: [
-                  optionDropdown(
-                    context,
-                    acessToken ?? '',
+                  BlocBuilder<ConfigCubitCubit, ConfigCubitState>(
+                    builder: (context, state) {
+                      if ((state is ConfigLoadedState)) {
+                        return optionDropdown(
+                          (state.configResponseModel?.cartItems).toString(),
+                          context,
+                          acessToken ?? '',
+                        );
+                      }
+                      return optionDropdown(
+                        "0",
+                        context,
+                        acessToken ?? '',
+                      );
+                    },
                   ),
                   mWidthSpan,
                 ],

@@ -79,17 +79,17 @@ class LogincubitCubit extends Cubit<LoginCubitCubitState> {
 
         (LoginResponseModel data) async {
 
-          _toastService.s(data.status ?? "LogIn sucessfully!");
-
-
           _localStorageService.write(
 
               LocalStorageKeys.accessToken, data.accessToken);
 
 
           _appRouters.pushAndPopUntil(
+
             const DashboardView(),
+
             predicate: (route) => false,
+
           );
 
         },

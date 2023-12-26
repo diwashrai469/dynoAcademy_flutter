@@ -17,6 +17,7 @@ Widget cartCourseList(
     itemCount: courseCartResponseModel?.data?.length ?? 0,
     itemBuilder: (context, index) {
       final courseCartDetails = courseCartResponseModel?.data?[index];
+
       return Container(
         margin: const EdgeInsets.all(15),
         decoration: BoxDecoration(
@@ -84,7 +85,9 @@ Widget cartCourseList(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       KButton(
-                          isBusy: state.isRemovingFromCart ?? false,
+                          isBusy: state.selectedIndex == index
+                              ? state.isRemovingFromCart ?? false
+                              : false,
                           backgroundColor: Colors.transparent,
                           size: ButtonSize.small,
                           bordered: true,
@@ -102,9 +105,8 @@ Widget cartCourseList(
                             ],
                           ),
                           onPressed: () {
-                            BlocProvider.of<CourseCartCubit>(context)
-                                .removeFromCart(
-                                    courseCartDetails?.courseId?.sId ?? '');
+                            context.read<CourseCartCubit>().removeFromCart(
+                                courseCartDetails?.courseId?.sId ?? '', index);
                           })
                     ],
                   )
