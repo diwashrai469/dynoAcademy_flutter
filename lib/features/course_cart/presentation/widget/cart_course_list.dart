@@ -102,8 +102,9 @@ Widget cartCourseList(
                             ],
                           ),
                           onPressed: () {
-                            context.read<CourseCartCubit>().removeFromCart(
-                                courseCartDetails?.courseId?.sId ?? '');
+                            BlocProvider.of<CourseCartCubit>(context)
+                                .removeFromCart(
+                                    courseCartDetails?.courseId?.sId ?? '');
                           })
                     ],
                   )

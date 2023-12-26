@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dynoacademy/common/constant/ui_helpers.dart';
-import 'package:dynoacademy/common/utils/app_text_style.dart';
 import 'package:dynoacademy/common/widgets/k_button.dart';
 import 'package:dynoacademy/common/widgets/k_loading_indicator.dart';
 import 'package:dynoacademy/core/app_routers/app_routers.dart';

@@ -1,13 +1,17 @@
 import 'package:dynoacademy/common/constant/app_dimens.dart';
 import 'package:dynoacademy/core/app_routers/app_routers.dart';
 import 'package:dynoacademy/core/injection/injection.dart';
+import 'package:dynoacademy/core/services/local_storage.dart';
+import 'package:dynoacademy/features/config/cubit/config_cubit_cubit.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oktoast/oktoast.dart';
 
-void main() {
+void main() async {
+  await LocalStorageService.init();
   setupLocator();
+  locator<ConfigCubitCubit>().getConfigTimePeriodic();
   runApp(const App());
 }
 

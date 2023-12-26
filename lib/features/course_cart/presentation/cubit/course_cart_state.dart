@@ -1,40 +1,23 @@
 part of 'course_cart_cubit.dart';
 
-
-sealed class CourseCartState extends Equatable {
-
+@immutable
+abstract class CourseCartState {
   const CourseCartState();
-
-
-  @override
-
-  List<Object> get props => [];
-
 }
 
+class DataLoadingState extends CourseCartState {}
 
-final class DataLoadingState extends CourseCartState {}
+class DataInitialState extends CourseCartState {}
 
+class DataErrorState extends CourseCartState {}
 
-final class DataInitialState extends CourseCartState {}
-
-
-final class DataErrorState extends CourseCartState {}
-
-
-final class DataLoadedState extends CourseCartState {
-
+class DataLoadedState extends CourseCartState {
   final bool? isRemovingFromCart;
-
 
   final CourseCartResponseModel? courseCartResponseModel;
 
-
   const DataLoadedState(
       {this.isRemovingFromCart, this.courseCartResponseModel});
-
 }
 
-
-final class DataEmptyState extends CourseCartState {}
-
+class DataEmptyState extends CourseCartState {}
