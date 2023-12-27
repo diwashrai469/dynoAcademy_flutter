@@ -48,7 +48,7 @@ class ConfigCubitCubit extends Cubit<ConfigCubitState> {
 
       this._configUsecase, this._toastService, this._localStorageService)
 
-      : super(ConfigInitialState());
+      : super(const ConfigLoadedState(configResponseModel: null));
 
 
   void getConfigTimePeriodic() {
@@ -73,38 +73,54 @@ class ConfigCubitCubit extends Cubit<ConfigCubitState> {
     String? token = _localStorageService.read(LocalStorageKeys.accessToken);
 
 
-    if (token == null) {
+    if (state is ConfigLoadedState) {
 
-      return;
-
-    }
+      ConfigLoadedState currentState = state as ConfigLoadedState;
 
 
-    emit(ConfigLoadingState());
+      if (token == null) {
+
+        return;
+
+      }
 
 
-    var result = await _configUsecase.getConfig();
+      emit(ConfigLoadedState(
+
+          configResponseModel: currentState.configResponseModel));
 
 
-    result.fold(
+      try {
 
-      (NetworkFailure error) async {
+        var result = await _configUsecase.getConfig();
 
-        _toastService.e(error.message.toString());
 
-      },
+        result.fold(
 
-      (ConfigResponseModel data) async {
+          (NetworkFailure error) async {
 
-        emit(
+            _toastService.e(error.message.toString());
 
-          ConfigLoadedState(configResponseModel: data),
+          },
+
+          (ConfigResponseModel data) async {
+
+            print("config is called");
+
+
+            emit(ConfigLoadedState(configResponseModel: data));
+
+          },
 
         );
 
-      },
+      } catch (e) {
 
-    );
+        print(e);
+
+      }
+
+    }
 
   }
 

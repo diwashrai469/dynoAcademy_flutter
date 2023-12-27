@@ -38,7 +38,7 @@ class DioService {
 
               Future.delayed(const Duration(milliseconds: 100), () {
                 _appRouters.pushAndPopUntil(
-                  const LoginView(),
+                  const UnauthorizationView(),
                   predicate: (route) => false,
                 );
               });

@@ -25,6 +25,12 @@ class AppRouters extends $AppRouters {
         ),
         AutoRoute(
           page: CourseCartView.page,
+        ),
+        AutoRoute(
+          page: UnauthorizationView.page,
+        ),
+        AutoRoute(
+          page: MyCourseView.page,
         )
       ];
 }

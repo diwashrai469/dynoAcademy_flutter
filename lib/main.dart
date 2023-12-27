@@ -5,13 +5,13 @@ import 'package:dynoacademy/core/services/local_storage.dart';
 import 'package:dynoacademy/features/config/cubit/config_cubit_cubit.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oktoast/oktoast.dart';
 
 void main() async {
   await LocalStorageService.init();
   setupLocator();
-  locator<ConfigCubitCubit>().getConfigTimePeriodic();
   runApp(const App());
 }
 
@@ -22,14 +22,18 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return OKToast(
       position: ToastPosition.bottom,
-      child: ScreenUtilInit(
-        designSize: const Size(AppDimens.appWidth, AppDimens.appHeight),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, child) => MaterialApp.router(
-          theme: AppThemes.light,
-          debugShowCheckedModeBanner: false,
-          routerConfig: locator<AppRouters>().config(),
+      child: BlocProvider<ConfigCubitCubit>(
+        create: (context) =>
+            locator<ConfigCubitCubit>()..getConfigTimePeriodic(),
+        child: ScreenUtilInit(
+          designSize: const Size(AppDimens.appWidth, AppDimens.appHeight),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (_, child) => MaterialApp.router(
+            theme: AppThemes.light,
+            debugShowCheckedModeBanner: false,
+            routerConfig: locator<AppRouters>().config(),
+          ),
         ),
       ),
     );
