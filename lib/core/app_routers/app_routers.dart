@@ -31,6 +31,9 @@ class AppRouters extends $AppRouters {
         ),
         AutoRoute(
           page: MyCourseView.page,
-        )
+        ),
+        AutoRoute(
+          page: NotificationView.page,
+        ),
       ];
 }

@@ -46,32 +46,36 @@ class DashboardView extends StatelessWidget {
           BlocBuilder<ConfigCubitCubit, ConfigCubitState>(
             builder: (context, state) {
               if (state is ConfigLoadedState) {
-                return Stack(
-                  children: [
-                    const CircleAvatar(
-                      backgroundColor: Colors.deepPurple,
-                      child: Icon(
-                        Icons.notifications,
-                        size: 22,
-                        color: Colors.white,
-                      ),
-                    ),
-                    if ((state.configResponseModel?.notifications ?? 0) > 0)
-                      Positioned(
-                        right: 0,
-                        child: CircleAvatar(
-                          backgroundColor: errorColor,
-                          radius: 9,
-                          child: Text(
-                            (state.configResponseModel?.notifications ?? "0")
-                                .toString(),
-                            style: appTextStyle(context)?.copyWith(
-                                color: Colors.white,
-                                fontSize: AppDimens.headlineFontSizeXXXSmall),
-                          ),
+                return GestureDetector(
+                  onTap: () =>
+                      locator<AppRouters>().push(const NotificationView()),
+                  child: Stack(
+                    children: [
+                      const CircleAvatar(
+                        backgroundColor: Colors.deepPurple,
+                        child: Icon(
+                          Icons.notifications,
+                          size: 22,
+                          color: Colors.white,
                         ),
                       ),
-                  ],
+                      if ((state.configResponseModel?.notifications ?? 0) > 0)
+                        Positioned(
+                          right: 0,
+                          child: CircleAvatar(
+                            backgroundColor: errorColor,
+                            radius: 9,
+                            child: Text(
+                              (state.configResponseModel?.notifications ?? "0")
+                                  .toString(),
+                              style: appTextStyle(context)?.copyWith(
+                                  color: Colors.white,
+                                  fontSize: AppDimens.headlineFontSizeXXXSmall),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 );
               } else {
                 return const SizedBox.shrink();
