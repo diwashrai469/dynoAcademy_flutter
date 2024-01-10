@@ -16,10 +16,9 @@ class NotificationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("build called");
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Notification"),
+          title: const Text("Notifications"),
         ),
         body: buildBody());
   }
