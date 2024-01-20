@@ -92,7 +92,7 @@ Widget optionDropdown(
                         radius: 12,
                         child: state is ConfigLoadedState
                             ? Text(
-                                (state.configResponseModel!.cartItems ?? 0)
+                                (state.configResponseModel?.cartItems ?? 0)
                                     .toString(),
                                 style: appTextStyle(context)?.copyWith(
                                     color: Colors.white,

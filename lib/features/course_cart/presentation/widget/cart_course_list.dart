@@ -85,29 +85,30 @@ Widget cartCourseList(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       KButton(
-                          isBusy: state.selectedIndex == index
-                              ? state.isRemovingFromCart ?? false
-                              : false,
-                          backgroundColor: Colors.transparent,
-                          size: ButtonSize.small,
-                          bordered: true,
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.delete,
-                                color: darkErrorColor,
-                              ),
-                              sWidthSpan,
-                              Text(
-                                "Remove",
-                                style: appTextStyle(context),
-                              )
-                            ],
-                          ),
-                          onPressed: () {
-                            context.read<CourseCartCubit>().removeFromCart(
-                                courseCartDetails?.courseId?.sId ?? '', index);
-                          })
+                        isBusy: state.selectedIndex == index
+                            ? state.isRemovingFromCart ?? false
+                            : false,
+                        backgroundColor: Colors.transparent,
+                        size: ButtonSize.small,
+                        bordered: true,
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.delete,
+                              color: darkErrorColor,
+                            ),
+                            sWidthSpan,
+                            Text(
+                              "Remove",
+                              style: appTextStyle(context),
+                            )
+                          ],
+                        ),
+                        onPressed: () {
+                          context.read<CourseCartCubit>().removeFromCart(
+                              courseCartDetails?.courseId?.sId ?? '', index);
+                        },
+                      )
                     ],
                   )
                 ],

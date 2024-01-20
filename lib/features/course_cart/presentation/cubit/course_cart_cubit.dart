@@ -102,6 +102,7 @@ class CourseCartCubit extends Cubit<CourseCartState> {
 
 
     emit(DataLoadedState(
+
         selectedIndex: selectedIndex,
 
         isRemovingFromCart: true,
