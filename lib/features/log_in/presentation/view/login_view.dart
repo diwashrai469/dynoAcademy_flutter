@@ -96,15 +96,15 @@ class LoginView extends StatelessWidget {
                               },
                             ),
                             mHeightSpan,
-                            Switch(
-                              onChanged: (value) =>
-                                  loginCubit.toggleSwitch(value),
-                              value: state is SwitchOn,
-                              activeColor: Colors.blue,
-                              activeTrackColor: Colors.yellow,
-                              inactiveThumbColor: Colors.redAccent,
-                              inactiveTrackColor: Colors.orange,
-                            )
+                            // Switch(
+                            //   onChanged: (value) =>
+                            //       loginCubit.toggleSwitch(value),
+                            //   value: state is SwitchOn,
+                            //   activeColor: Colors.blue,
+                            //   activeTrackColor: Colors.yellow,
+                            //   inactiveThumbColor: Colors.redAccent,
+                            //   inactiveTrackColor: Colors.orange,
+                            // )
                           ],
                         ),
                       ),

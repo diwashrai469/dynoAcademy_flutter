@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dynoacademy/core/services/network_services.dart';
 import 'package:dynoacademy/features/course_details/data/model/add_to_cart_response_model/add_to_cart_response_model.dart';
+import 'package:dynoacademy/features/course_details/data/model/course_lessons_response_model/course_lessons_response_model.dart';
 import 'package:dynoacademy/features/course_details/data/model/course_status_response_model/course_status_response_model.dart';
 import 'package:dynoacademy/features/course_details/data/model/course_videos_preview_response_model/course_videos_preview_response_model.dart';
 import 'package:dynoacademy/features/course_details/data/services/courses_details_services.dart';
@@ -52,6 +53,17 @@ class CourseDetailsRepositoryImpl extends ICourseDetailsRepository {
       {required String courseId}) async {
     try {
       var result = await _courseDetailsServices.checkCourseStatus(courseId);
+      return Right(result);
+    } on NetworkFailure catch (e) {
+      return Left(e);
+    }
+  }
+
+  @override
+  Future<Either<NetworkFailure, CourseLessonsResponseModel>> getCourseLesson(
+      {required String courseId}) async {
+    try {
+      var result = await _courseDetailsServices.getCourseLesson(courseId);
       return Right(result);
     } on NetworkFailure catch (e) {
       return Left(e);

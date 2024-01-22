@@ -12,6 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  esewa_flutter_sdk:
+    path: ./external_sdk/esewa_sdk/esewa_flutter_sdk
   cupertino_icons: ^1.0.6
   dio: ^5.4.0
   get_storage: ^2.1.1

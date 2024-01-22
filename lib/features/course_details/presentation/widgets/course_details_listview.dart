@@ -7,11 +7,13 @@ import 'package:dynoacademy/core/app_routers/app_routers.gr.dart';
 import 'package:dynoacademy/core/injection/injection.dart';
 import 'package:dynoacademy/features/course_details/data/model/course_details_response_model/course_details_response_model.dart';
 import 'package:dynoacademy/features/course_details/data/model/course_status_response_model/course_status_response_model.dart';
+import 'package:dynoacademy/features/esewa/esewa.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../common/constant/app_dimens.dart';
 import '../bloc/course_details_bloc.dart';
 
@@ -21,6 +23,24 @@ Widget courseDetailsListview(
     required String courseid,
     required CourseDetailsLoadedState state,
     required Data? courseStatus}) {
+  void onpressedAction() {
+    if (courseStatus?.courseStatus == null) {
+      context
+          .read<CourseDetailsBloc>()
+          .add(AddToCartEvent(courseId: courseDataDetails?.id ?? ''));
+    }
+    if ((courseStatus?.courseStatus == "active")) {
+      locator<AppRouters>().push(
+        CourseLesson(
+            courseId: courseid,
+            courseTitle: courseDataDetails?.courseName ?? ''),
+      );
+    }
+    if ((courseStatus?.courseStatus == "pending")) {
+      Esewa().pay();
+    }
+  }
+
   return SingleChildScrollView(
     child: Padding(
       padding: AppDimens.mainPagePadding,
@@ -66,12 +86,13 @@ Widget courseDetailsListview(
           ),
           mHeightSpan,
           KButton(
-              child: const Text("Preview Course"),
-              onPressed: () => locator<AppRouters>().push(
-                    PreviewCourseVideos(
-                        courseId: courseid,
-                        courseTitle: courseDataDetails?.courseName ?? ''),
-                  )),
+            child: const Text("Preview Course"),
+            onPressed: () => locator<AppRouters>().push(
+              PreviewCourseVideos(
+                  courseId: courseid,
+                  courseTitle: courseDataDetails?.courseName ?? ''),
+            ),
+          ),
           mHeightSpan,
           Text(courseDataDetails?.courseInfo ?? ''),
           mHeightSpan,
@@ -114,31 +135,8 @@ Widget courseDetailsListview(
           lHeightSpan,
           KButton(
             isBusy: state.isAddingToCart ?? false,
-            child: courseStatus?.courseStatus == "pending"
-                ? Row(
-                    children: [
-                      const Icon(
-                        CupertinoIcons.check_mark_circled,
-                        color: successColor,
-                      ),
-                      xsWidthSpan,
-                      const Text("Added to Cart"),
-                    ],
-                  )
-                : Row(
-                    children: [
-                      const Icon(Icons.shopping_cart_outlined),
-                      xsWidthSpan,
-                      const Text("Add To Cart"),
-                    ],
-                  ),
-            onPressed: () {
-              if (courseStatus?.courseStatus == null) {
-                context
-                    .read<CourseDetailsBloc>()
-                    .add(AddToCartEvent(courseId: courseDataDetails?.id ?? ''));
-              }
-            },
+            child: buildButtonContent(courseStatus),
+            onPressed: () => onpressedAction(),
           ),
           elHeightSpan,
           Text(
@@ -156,4 +154,29 @@ Widget courseDetailsListview(
       ),
     ),
   );
+}
+
+Widget buildButtonContent(Data? courseStatus) {
+  if (courseStatus?.courseStatus == "pending") {
+    return Row(
+      children: [
+        const Icon(
+          Icons.check_circle,
+          color: successColor,
+        ),
+        sWidthSpan,
+        const Text("Procced to payment"),
+      ],
+    );
+  } else if (courseStatus?.courseStatus == "active") {
+    return const Text("Go to course");
+  } else {
+    return Row(
+      children: [
+        const Icon(Icons.shopping_cart_outlined),
+        xsWidthSpan,
+        const Text("Add To Cart"),
+      ],
+    );
+  }
 }
