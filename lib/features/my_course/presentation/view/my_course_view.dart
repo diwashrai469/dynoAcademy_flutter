@@ -75,74 +75,81 @@ class MyCourseView extends StatelessWidget {
                   final courseCartDetails =
                       state.myCoursesResponseModel?.data?[index];
 
-                  return Container(
-                    margin: const EdgeInsets.all(15).dg,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10).r,
-                      border: Border.all(color: disabledColor),
-                    ),
-                    child: Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
+                  return GestureDetector(
+                    onTap: () => locator<AppRouters>().push(CourseDetails(
+                        slug: courseCartDetails?.courseId?.courseSlug ?? '',
+                        courseid: courseCartDetails?.courseId?.sId ?? '')),
+                    child: Container(
+                      margin: const EdgeInsets.all(15).dg,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10).r,
+                        border: Border.all(color: disabledColor),
+                      ),
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            child: Image.network(
+                                courseCartDetails?.courseId?.thumbnail ?? ''),
                           ),
-                          child: Image.network(
-                              courseCartDetails?.courseId?.thumbnail ?? ''),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 15.0,
-                            horizontal: 15,
-                          ),
-                          child: Column(
-                            children: [
-                              Text(
-                                courseCartDetails?.courseId?.courseName ?? '',
-                                style: appTextStyle(context)?.copyWith(
-                                  fontWeight: AppDimens.lfontweight,
-                                  fontSize: AppDimens.headlineFontSizeXSmall,
-                                ),
-                              ),
-                              ListTile(
-                                minVerticalPadding: 0,
-                                titleTextStyle: appTextStyle(context)?.copyWith(
-                                  fontWeight: AppDimens.lfontweight,
-                                  fontSize: AppDimens.headlineFontSizeXXSmall,
-                                ),
-                                subtitleTextStyle:
-                                    appTextStyle(context)?.copyWith(
-                                  fontWeight: AppDimens.lfontweight,
-                                  fontSize: AppDimens.headlineFontSizeXXSmall,
-                                ),
-                                leadingAndTrailingTextStyle:
-                                    appTextStyle(context)?.copyWith(
-                                  fontWeight: AppDimens.lfontweight,
-                                  fontSize: AppDimens.headlineFontSizeXSmall,
-                                ),
-                                contentPadding: EdgeInsets.zero,
-                                leading: CircleAvatar(
-                                  radius: 15.r,
-                                  child: Icon(
-                                    Icons.person,
-                                    size: 20.h,
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 15.0,
+                              horizontal: 15,
+                            ),
+                            child: Column(
+                              children: [
+                                Text(
+                                  courseCartDetails?.courseId?.courseName ?? '',
+                                  style: appTextStyle(context)?.copyWith(
+                                    fontWeight: AppDimens.lfontweight,
+                                    fontSize: AppDimens.headlineFontSizeXSmall,
                                   ),
                                 ),
-                                title: Text(
-                                  courseCartDetails?.courseId?.studentsEnrolled
-                                          .toString() ??
-                                      "0",
+                                ListTile(
+                                  minVerticalPadding: 0,
+                                  titleTextStyle:
+                                      appTextStyle(context)?.copyWith(
+                                    fontWeight: AppDimens.lfontweight,
+                                    fontSize: AppDimens.headlineFontSizeXXSmall,
+                                  ),
+                                  subtitleTextStyle:
+                                      appTextStyle(context)?.copyWith(
+                                    fontWeight: AppDimens.lfontweight,
+                                    fontSize: AppDimens.headlineFontSizeXXSmall,
+                                  ),
+                                  leadingAndTrailingTextStyle:
+                                      appTextStyle(context)?.copyWith(
+                                    fontWeight: AppDimens.lfontweight,
+                                    fontSize: AppDimens.headlineFontSizeXSmall,
+                                  ),
+                                  contentPadding: EdgeInsets.zero,
+                                  leading: CircleAvatar(
+                                    radius: 15.r,
+                                    child: Icon(
+                                      Icons.person,
+                                      size: 20.h,
+                                    ),
+                                  ),
+                                  title: Text(
+                                    courseCartDetails
+                                            ?.courseId?.studentsEnrolled
+                                            .toString() ??
+                                        "0",
+                                  ),
+                                  subtitle: const Text("enrolled"),
+                                  trailing: Text(
+                                      "रु ${courseCartDetails?.courseId?.cost.toString()}"),
                                 ),
-                                subtitle: const Text("enrolled"),
-                                trailing: Text(
-                                    "रु ${courseCartDetails?.courseId?.cost.toString()}"),
-                              ),
-                              sHeightSpan,
-                            ],
+                                sHeightSpan,
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },

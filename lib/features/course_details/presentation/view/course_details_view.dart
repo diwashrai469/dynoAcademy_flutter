@@ -14,6 +14,8 @@ class CourseDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(slug);
+    print(courseid);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Course Details"),
@@ -31,29 +33,31 @@ class CourseDetails extends StatelessWidget {
 
         return bloc;
       },
-      child: Builder(builder: (context) {
-        return BlocBuilder<CourseDetailsBloc, CourseDetailsState>(
-          builder: (_, state) {
-            if (state is CourseDetailsLoadingState) {
-              return Center(child: kLoadingIndicator(context: context));
-            }
-            if (state is CourseDetailsLoadedState) {
-              final courseDataDetails =
-                  state.courseDetailsResponseModel?.pageProps?.courseData;
-              final courseStatus = state.courseStatus?.data;
+      child: Builder(
+        builder: (context) {
+          return BlocBuilder<CourseDetailsBloc, CourseDetailsState>(
+            builder: (_, state) {
+              if (state is CourseDetailsLoadingState) {
+                return Center(child: kLoadingIndicator(context: context));
+              }
+              if (state is CourseDetailsLoadedState) {
+                final courseDataDetails =
+                    state.courseDetailsResponseModel?.pageProps?.courseData;
+                final courseStatus = state.courseStatus?.data;
 
-              return courseDetailsListview(
-                context: context,
-                courseDataDetails: courseDataDetails,
-                courseStatus: courseStatus,
-                courseid: courseid,
-                state: state,
-              );
-            }
-            return Center(child: Text("Unexpected state: $state"));
-          },
-        );
-      }),
+                return courseDetailsListview(
+                  context: context,
+                  courseDataDetails: courseDataDetails,
+                  courseStatus: courseStatus,
+                  courseid: courseid,
+                  state: state,
+                );
+              }
+              return Center(child: Text("Unexpected state: $state"));
+            },
+          );
+        },
+      ),
     );
   }
 }

@@ -46,9 +46,11 @@ Widget courseViewList(
               final courseDataIndex = state
                   .courseResponseModel?.pageProps?.courseData?.data?[index];
               return GestureDetector(
-                onTap: () => locator<AppRouters>().push(CourseDetails(
-                    slug: courseDataIndex?.courseSlug ?? '',
-                    courseid: courseDataIndex?.sId ?? '')),
+                onTap: () => locator<AppRouters>().push(
+                  CourseDetails(
+                      slug: courseDataIndex?.courseSlug ?? '',
+                      courseid: courseDataIndex?.sId ?? ''),
+                ),
                 child: Container(
                   margin: const EdgeInsets.all(15),
                   decoration: BoxDecoration(

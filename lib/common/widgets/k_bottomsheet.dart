@@ -1,18 +1,20 @@
-import 'package:dynoacademy/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-kBottonsheet(
-  BuildContext context,
-  Widget widget,
-  bool isScrollControlled,
-) {
+void kBottonsheet({
+  required BuildContext context,
+  bool? isScrollControlled,
+  required Widget widget,
+}) {
   showModalBottomSheet(
     context: context,
-    isScrollControlled: isScrollControlled,
+    isScrollControlled: isScrollControlled ?? false,
     builder: (context) => widget,
     shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12), topRight: Radius.circular(12))),
-    backgroundColor: lightThemescaffoldColor,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(12),
+        topRight: Radius.circular(12),
+      ),
+    ),
+    backgroundColor: Colors.white,
   );
 }

@@ -1,37 +1,42 @@
+import 'package:dio/dio.dart';
 import 'package:dynoacademy/common/constant/esewa_constant.dart';
-import 'package:esewa_flutter_sdk/esewa_config.dart';
+import 'package:dynoacademy/core/services/toast_services.dart';
+import 'package:esewa_flutter_sdk/esewa_config.dart' as esewa_config;
 import 'package:esewa_flutter_sdk/esewa_flutter_sdk.dart';
 import 'package:esewa_flutter_sdk/esewa_payment.dart';
 import 'package:esewa_flutter_sdk/esewa_payment_success_result.dart';
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class Esewa {
-  pay() {
+  final ToastService _toastService;
+  Esewa(this._toastService);
+  void pay({required String productName, required num productPrice}) {
     try {
       EsewaFlutterSdk.initPayment(
-          esewaConfig: EsewaConfig(
+          esewaConfig: esewa_config.EsewaConfig(
               clientId: CLIENT_ID,
               secretId: SECRET_KEY,
-              environment: Environment.test),
+              environment: esewa_config.Environment.test),
           esewaPayment: EsewaPayment(
               productId: "1d71jd81",
-              productName: "Product One",
-              productPrice: "1000",
+              productName: productName,
+              productPrice: productPrice.toString(),
               callbackUrl: ""),
           onPaymentSuccess: (EsewaPaymentSuccessResult result) {
             verify(result);
-            print("sucess");
+            _toastService.s("Your payment is sucessfull.");
           },
           onPaymentFailure: () {
-            print("falied");
+            _toastService.e("Your payment failed. Please try again.");
           },
           onPaymentCancellation: () {
-            print("cancled");
+            _toastService.i("Your payment was cancled.");
           });
     } catch (e) {
-      print("some error $e");
+      _toastService.e("Your payment failed. $e");
     }
   }
 

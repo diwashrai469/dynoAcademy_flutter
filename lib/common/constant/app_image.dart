@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class AppImage {
   static const String logoName = 'assets/logo.png';
   static const String dashboardGirl = 'assets/dashboardgirl.png';
+  static const String esewaImg = 'assets/esewa.png';
+  static const String khaltiImg = 'assets/khalti.png';
 
 //image height
   static final double llogoHeight = 130.h;

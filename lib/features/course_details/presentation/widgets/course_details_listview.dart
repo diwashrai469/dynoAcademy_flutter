@@ -7,9 +7,8 @@ import 'package:dynoacademy/core/app_routers/app_routers.gr.dart';
 import 'package:dynoacademy/core/injection/injection.dart';
 import 'package:dynoacademy/features/course_details/data/model/course_details_response_model/course_details_response_model.dart';
 import 'package:dynoacademy/features/course_details/data/model/course_status_response_model/course_status_response_model.dart';
-import 'package:dynoacademy/features/esewa/esewa.dart';
+import 'package:dynoacademy/features/course_details/presentation/widgets/payment_option_bottomsheet.dart';
 import 'package:dynoacademy/theme/app_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +22,10 @@ Widget courseDetailsListview(
     required String courseid,
     required CourseDetailsLoadedState state,
     required Data? courseStatus}) {
-  void onpressedAction() {
+  void onpressedAction(
+      {required BuildContext context,
+      required String productName,
+      required num productPrice}) {
     if (courseStatus?.courseStatus == null) {
       context
           .read<CourseDetailsBloc>()
@@ -37,7 +39,10 @@ Widget courseDetailsListview(
       );
     }
     if ((courseStatus?.courseStatus == "pending")) {
-      Esewa().pay();
+      paymentOptionBottomsheet(
+          context: context,
+          productName: productName,
+          productPrice: productPrice);
     }
   }
 
@@ -136,7 +141,10 @@ Widget courseDetailsListview(
           KButton(
             isBusy: state.isAddingToCart ?? false,
             child: buildButtonContent(courseStatus),
-            onPressed: () => onpressedAction(),
+            onPressed: () => onpressedAction(
+                context: context,
+                productName: courseDataDetails?.courseName ?? '',
+                productPrice: courseDataDetails?.cost ?? 0),
           ),
           elHeightSpan,
           Text(
