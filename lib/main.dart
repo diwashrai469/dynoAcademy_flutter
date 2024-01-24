@@ -37,16 +37,17 @@ class App extends StatelessWidget {
               navigatorKey: locator<AppRouters>().navigatorKey,
               builder: (context, _) {
                 return MaterialApp.router(
-                    theme: AppThemes.light,
-                    debugShowCheckedModeBanner: false,
-                    routerConfig: locator<AppRouters>().config(),
-                    supportedLocales: const [
-                      Locale('en', 'US'),
-                      Locale('ne', 'NP'),
-                    ],
-                    localizationsDelegates: const [
-                      KhaltiLocalizations.delegate,
-                    ]);
+                  theme: AppThemes.light,
+                  debugShowCheckedModeBanner: false,
+                  routerConfig: locator<AppRouters>().config(),
+                  supportedLocales: const [
+                    Locale('en', 'US'),
+                    Locale('ne', 'NP'),
+                  ],
+                  localizationsDelegates: const [
+                    KhaltiLocalizations.delegate,
+                  ],
+                );
               }),
         ),
       ),
