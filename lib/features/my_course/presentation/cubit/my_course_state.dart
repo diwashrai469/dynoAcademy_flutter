@@ -19,6 +19,15 @@ class MyCourseInitialState extends MyCourseState {}
 class MyCourseEmptyState extends MyCourseState {}
 
 
+class MyCourseErrorState extends MyCourseState {
+  final String error;
+
+
+  const MyCourseErrorState(this.error);
+
+}
+
+
 class MyCourseLoadedState extends MyCourseState {
 
   final MyCoursesResponseModel? myCoursesResponseModel;

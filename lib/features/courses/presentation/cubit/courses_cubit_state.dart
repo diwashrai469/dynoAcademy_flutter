@@ -1,7 +1,7 @@
 part of 'courses_cubit_cubit.dart';
 
 
-sealed class CoursesCubitState extends Equatable {
+abstract class CoursesCubitState extends Equatable {
 
   const CoursesCubitState();
 

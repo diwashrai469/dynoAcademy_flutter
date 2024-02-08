@@ -37,7 +37,7 @@ class MyCourseCubit extends Cubit<MyCourseState> {
       : super(MyCourseInitialState());
 
 
-  void getMyCourse() async {
+  getMyCourse() async {
 
     emit(MyCourseLoadingState());
 
@@ -50,6 +50,13 @@ class MyCourseCubit extends Cubit<MyCourseState> {
       (NetworkFailure error) {
 
         _toastService.e(error.message.toString());
+
+
+        emit(
+          MyCourseErrorState(
+            error.message.toString(),
+          ),
+        );
 
       },
 
