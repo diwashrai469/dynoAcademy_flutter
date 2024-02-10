@@ -52,7 +52,7 @@ class CourseCartCubit extends Cubit<CourseCartState> {
 
     if (emitLoadingState) {
 
-      emit(DataLoadingState());
+      emit(CourseCartDataLoadingState());
 
     }
 
@@ -81,7 +81,7 @@ class CourseCartCubit extends Cubit<CourseCartState> {
 
           emit(
 
-            DataLoadedState(
+            CourseCartDataLoadedState(
 
                 courseCartResponseModel: data, isRemovingFromCart: false),
 
@@ -98,10 +98,10 @@ class CourseCartCubit extends Cubit<CourseCartState> {
 
   removeFromCart(String courseId, int selectedIndex) async {
 
-    DataLoadedState currentstate = state as DataLoadedState;
+    CourseCartDataLoadedState currentstate = state as CourseCartDataLoadedState;
 
 
-    emit(DataLoadedState(
+    emit(CourseCartDataLoadedState(
 
         selectedIndex: selectedIndex,
 

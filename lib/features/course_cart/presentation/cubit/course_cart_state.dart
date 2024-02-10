@@ -10,7 +10,7 @@ abstract class CourseCartState {
 }
 
 
-class DataLoadingState extends CourseCartState {}
+class CourseCartDataLoadingState extends CourseCartState {}
 
 
 class DataInitialState extends CourseCartState {}
@@ -19,7 +19,7 @@ class DataInitialState extends CourseCartState {}
 class DataErrorState extends CourseCartState {}
 
 
-class DataLoadedState extends CourseCartState {
+class CourseCartDataLoadedState extends CourseCartState {
 
   final bool? isRemovingFromCart;
 
@@ -30,10 +30,12 @@ class DataLoadedState extends CourseCartState {
   final CourseCartResponseModel? courseCartResponseModel;
 
 
-  const DataLoadedState(
+  const CourseCartDataLoadedState(
 
       {this.isRemovingFromCart,
+
       this.courseCartResponseModel,
+
       this.selectedIndex});
 
 }

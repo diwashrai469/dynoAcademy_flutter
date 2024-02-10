@@ -11,7 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget cartCourseList(
     {required BuildContext context,
-    required DataLoadedState state,
+    required CourseCartDataLoadedState state,
     CourseCartResponseModel? courseCartResponseModel}) {
   return ListView.builder(
     itemCount: courseCartResponseModel?.data?.length ?? 0,

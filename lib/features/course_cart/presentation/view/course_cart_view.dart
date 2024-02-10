@@ -28,7 +28,7 @@ class CourseCartView extends StatelessWidget {
       create: (context) => locator<CourseCartCubit>()..getCartCourse(),
       child: BlocBuilder<CourseCartCubit, CourseCartState>(
         builder: (context, state) {
-          if (state is DataLoadingState) {
+          if (state is CourseCartDataLoadingState) {
             return Center(child: kLoadingIndicator(context: context));
           } else if (state is DataEmptyState) {
             return const Center(
@@ -36,7 +36,7 @@ class CourseCartView extends StatelessWidget {
                 "No any courses added to cart.",
               ),
             );
-          } else if (state is DataLoadedState) {
+          } else if (state is CourseCartDataLoadedState) {
             return cartCourseList(
                 state: state,
                 context: context,
